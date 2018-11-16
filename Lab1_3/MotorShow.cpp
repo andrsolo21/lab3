@@ -208,15 +208,15 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 	for (auto ** i = _head; i < _tail; i++) {
 		
 
-		d = (pow((*i)->getCoord(0) - carToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - carToCheck.getCoord(1),2));
+		d = sqrt(pow((*i)->getCoord(0) - carToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - carToCheck.getCoord(1),2));
 		if ((*i)->getType()) {
-			if ((*i)->getR() + carToCheck.getR() > d *d)
+			if ((*i)->getR() + carToCheck.getR() > d)
 				return false;
 			else {
 				
-				if (pow((*i)->getRBig() + carToCheck.getRBig(),2) > d)
+				if ((*i)->getRBig() + carToCheck.getRBig() > d)
 				{
-					/*float dots2[4][2];
+					float dots2[4][2];
 					for (int j = 0; j < 2; j++) {
 						dots2[0][j] = (*i)->getA(j);
 						dots2[1][j] = (*i)->getB(j);
@@ -226,11 +226,8 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 					flag1 = dots(dots1, dots2);
 					flag2 = dots(dots2, dots1);
 					if (flag1 == false && flag2 == false)
-						return false;*/
+						return false;
 				}
-				/*else {
-					return true;
-				}*/
 			}
 		}
 		else {
@@ -268,7 +265,7 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 		d = sqrt(((*i)->getCoord(0) - pToCheck.getCoord(0)) * ((*i)->getCoord(0) - pToCheck.getCoord(0)) +
 			((*i)->getCoord(1) - pToCheck.getCoord(1)) * ((*i)->getCoord(1) - pToCheck.getCoord(1)));
 		if ((*i)->getType()) {
-			/*if ((*i)->getRBig() + pToCheck.getR() > d) {
+			if ((*i)->getRBig() + pToCheck.getR() > d) {
 				count = 0;
 				for (auto j = 0; j < 4; j++)
 					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2)
@@ -276,7 +273,7 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 						count++;
 				if (count < 4)
 					return false;
-			}*/
+			}
 		}
 		else {
 			if ((*i)->getR() + pToCheck.getR() > d) {

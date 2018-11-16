@@ -33,6 +33,6 @@ public:
 private:
 	
 	float _size[2], _angle;
-	float _A[2], _B[2], _C[2], _D[2], _O[2],_R,_r,_dots[4][2];
+	float _A[2], _B[2], _C[2], _D[2], _O[2],_R,_dots[4][2];
 };
 
