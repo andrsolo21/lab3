@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include "MotorShow.h"
 #include <fstream> 
 #include <cstdio>
+
 MotorShow::MotorShow()
 {
 	_head = NULL;
@@ -74,6 +76,27 @@ MotorShow::MotorShow(std::string name) {
 
 }
 
+void MotorShow::exportToFile(QString name) {
+	ofstream fout(name.toStdString(), ios_base::out | ios_base::trunc);
+	fout << (_tail - _head) << endl;
+	fout << _gabarits[0] << ' ';
+	fout << _gabarits[1];
+	for (auto i = _head; i < _tail; i++) {
+		if ((*i)->getType()) {
+			fout << endl << "car";
+			fout << endl << ((*i)->getName()).toStdString() << endl;
+			fout << (*i)->getSize(0) << ' ' << (*i)->getSize(1) << ' ' << (*i)->getAngle() <<
+				' ' << (*i)->getCoord(0) << ' ' << (*i)->getCoord(1);
+		}
+		else {
+			fout << endl << "pres";
+			fout << endl << ((*i)->getName()).toStdString() << endl;
+			fout <<(*i)->getR() <<' ' << (*i)->getCoord(0) << ' ' << (*i)->getCoord(1);
+		}		
+	}
+	fout.close();
+}
+
 NoCar ** MotorShow::operator [](int c) const
 {
 	if (c < (_tail - _head) && c >= 0) {
@@ -99,13 +122,13 @@ void MotorShow::addEl(NoCar * element) {
 	}
 }
 
-void MotorShow::addEl(Car * element) {
+/*void MotorShow::addEl(Car * element) {
 	if (checkEl(*element)) {
 		grow10();
 		*(_tail) = element;
 		_tail = _tail + 1;
 	}
-}
+}*/
 
 void MotorShow::deleteElement(int c) {
 	if (c < (_tail - _head) && c >= 0) {
@@ -170,6 +193,7 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 	float d;
 	bool flag1, flag2, flag = true;
 	float dots1[4][2];
+	
 	for (int j = 0; j < 2; j++) {
 		dots1[0][j] = carToCheck.getA(j);
 		dots1[1][j] = carToCheck.getB(j);

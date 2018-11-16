@@ -1,4 +1,4 @@
-6
+5
 20 20
 pres
 Cont1
@@ -12,9 +12,6 @@ Cont1
 car
 MyBestCar2
 1 1 0 3 16
-car
-Cont2
-1 1 45 15 15
 pres
 Cont2
 3 12 12

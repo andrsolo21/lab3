@@ -12,19 +12,18 @@ public:
 	float getCoord(int i) const;
 	void setName(QString nameAdd);	
 	void setCoord(float coordAdd[]);
-	virtual bool isCar() const;
 	float getR() const;
 	virtual bool getType() const { return false; }
 
 	//UnitCar getKind() { return _kind; };
 
-	virtual float getAngle() const {}
-	virtual float getSize(int i) const {}
-	virtual float getA(int i) const{}
-	virtual float getB(int i) const {}
-	virtual float getC(int i) const {}
-	virtual float getD(int i) const {}
-	virtual float getRBig() const {}
+	virtual float getAngle() const { return 0; };
+	virtual float getSize(int i) const { return 0; };
+	virtual float getA(int i) const { return 0; };
+	virtual float getB(int i) const { return 0; };
+	virtual float getC(int i) const { return 0; };
+	virtual float getD(int i) const { return 0; };
+	virtual float getRBig() const { return 0; };
 
 protected:
 	QString _name;

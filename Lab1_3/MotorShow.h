@@ -20,11 +20,13 @@ public:
 
 	int getCount() const;
 	void addEl(NoCar * element);
-	void addEl(Car * element);
+	//void addEl(Car * element);
 	void deleteElement(int i);
 
 	NoCar ** operator[](int c) const;
 	float getGabarits(int i) const;
+
+	void exportToFile(QString name);
 
 protected:
 	NoCar **_head, **_tail;

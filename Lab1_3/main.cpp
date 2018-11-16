@@ -1,9 +1,13 @@
 #include "stdafx.h"
 #include "lab1_3.h"
 #include <QtWidgets/QApplication>
+#include "MotorShow.h"
 
 int main(int argc, char *argv[])
 {
+	MotorShow * motors = new MotorShow("output.txt");
+	motors->exportToFile("output.txt");
+	delete motors;
 	QApplication a(argc, argv);
 	Lab1_3 w;
 	w.show();

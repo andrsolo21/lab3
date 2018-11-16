@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "car.h"
 //#include <cstring>
 //#include <iostream>
@@ -33,8 +34,8 @@ Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 		_size[1] = 3;
 	}
 	_coord[0] = coordAdd[0];
-
 	_coord[1] = coordAdd[1];
+	calculate();
 }
 Car::Car(const Car &car) {
 	_name = car.getName();
@@ -54,6 +55,7 @@ Car& Car::operator = (NoCar car) {
 	_coord[0] = car.getCoord(0);
 	_coord[1] = car.getCoord(1);
 	calculate();
+	return *this;
 }
 void Car::copyCar(const Car &car) {
 	_name = car.getName();
