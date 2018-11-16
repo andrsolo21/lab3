@@ -5,9 +5,6 @@
 
 int main(int argc, char *argv[])
 {
-	MotorShow * motors = new MotorShow("output.txt");
-	motors->exportToFile("output.txt");
-	delete motors;
 	QApplication a(argc, argv);
 	Lab1_3 w;
 	w.show();
