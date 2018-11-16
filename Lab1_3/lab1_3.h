@@ -18,6 +18,13 @@ public:
 
 public slots:
 	void slotBut();
+	void doVisible1();
+	void doVisible2();
+	void doVisible3();
+	void doVisible4();
+	void doVisible5();
+	void doVisible6();
+	void reduce();
 
 private:
 	Ui::Lab1_3Class ui;

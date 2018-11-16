@@ -179,6 +179,7 @@ void MotorShow::grow10(int zn) {
 }
 
 bool MotorShow::checkEl(const NoCar & elToCheck) {
+	
 	if (elToCheck.getType()) {
 		//машина
 		return checkCar(elToCheck);
@@ -205,15 +206,17 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 		return false;
 
 	for (auto ** i = _head; i < _tail; i++) {
-		d = sqrt(((*i)->getCoord(0) - carToCheck.getCoord(0)) * ((*i)->getCoord(0) - carToCheck.getCoord(0)) +
-			((*i)->getCoord(1) - carToCheck.getCoord(1)) * ((*i)->getCoord(1) - carToCheck.getCoord(1)));
-		if ((*i)->getType()) {			
-			if ((*i)->getR() + carToCheck.getR() > d)
+		
+
+		d = (pow((*i)->getCoord(0) - carToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - carToCheck.getCoord(1),2));
+		if ((*i)->getType()) {
+			if ((*i)->getR() + carToCheck.getR() > d *d)
 				return false;
 			else {
-				if ((*i)->getRBig() + carToCheck.getRBig() > d) 
+				
+				if (pow((*i)->getRBig() + carToCheck.getRBig(),2) > d)
 				{
-					float dots2[4][2];
+					/*float dots2[4][2];
 					for (int j = 0; j < 2; j++) {
 						dots2[0][j] = (*i)->getA(j);
 						dots2[1][j] = (*i)->getB(j);
@@ -223,8 +226,11 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 					flag1 = dots(dots1, dots2);
 					flag2 = dots(dots2, dots1);
 					if (flag1 == false && flag2 == false)
-						return false;
+						return false;*/
 				}
+				/*else {
+					return true;
+				}*/
 			}
 		}
 		else {
@@ -248,6 +254,7 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 
 bool MotorShow::checkP(const NoCar & pToCheck) {
 	float dots1[4][2], d;
+	int count;
 	for (int j = 0; j < 2; j++) {
 		dots1[0][j] = pToCheck.getCoord(0) + pToCheck.getR();
 		dots1[1][j] = pToCheck.getCoord(1) + pToCheck.getR();
@@ -261,15 +268,15 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 		d = sqrt(((*i)->getCoord(0) - pToCheck.getCoord(0)) * ((*i)->getCoord(0) - pToCheck.getCoord(0)) +
 			((*i)->getCoord(1) - pToCheck.getCoord(1)) * ((*i)->getCoord(1) - pToCheck.getCoord(1)));
 		if ((*i)->getType()) {
-			if ((*i)->getRBig() + pToCheck.getR() > d) {
-				d = 0;
+			/*if ((*i)->getRBig() + pToCheck.getR() > d) {
+				count = 0;
 				for (auto j = 0; j < 4; j++)
 					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2)
 						- pow((*i)->getR(), 2) < 0)
-						d++;
-				if (d < 4)
+						count++;
+				if (count < 4)
 					return false;
-			}
+			}*/
 		}
 		else {
 			if ((*i)->getR() + pToCheck.getR() > d) {

@@ -141,15 +141,14 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 void Lab1_3::coonections() {
 	connect(ui.but_3, SIGNAL(clicked()), this, SLOT(slotBut()));
 	//connect(ui.printBtn, SIGNAL(clicked()), this, SLOT(printToFile()));
-	//connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
+	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
 
-	/*connect(ui.addFieldBut, SIGNAL(clicked()), this, 
-SLOT(doVisible1()));
-	connect(ui.addCarBut, SIGNAL(clicked()), this, SLOT(doVisible2()));
-	connect(ui.addPresBut, SIGNAL(clicked()), this, SLOT(doVisible3()));
-	connect(ui.changeFieldBut, SIGNAL(clicked()), this, SLOT(doVisible4()));
-	connect(ui.changeCarBut, SIGNAL(clicked()), this, SLOT(doVisible5()));
-	connect(ui.changePressBut, SIGNAL(clicked()), this, SLOT(doVisible6()));*/
+	connect(ui.addFieldBut_3, SIGNAL(clicked()), this,  SLOT(doVisible1()));
+	connect(ui.addCarBut_3, SIGNAL(clicked()), this, SLOT(doVisible2()));
+	connect(ui.addPresBut_3, SIGNAL(clicked()), this, SLOT(doVisible3()));
+	connect(ui.changeFieldBut_3, SIGNAL(clicked()), this, SLOT(doVisible4()));
+	connect(ui.changeCarBut_3, SIGNAL(clicked()), this, SLOT(doVisible5()));
+	connect(ui.changePressBut_3, SIGNAL(clicked()), this, SLOT(doVisible6()));
 
 	/*connect(ui.but5, SIGNAL(clicked()), this, SLOT(cancelCar()));
 	connect(ui.but7, SIGNAL(clicked()), this, SLOT(deleteThisCar()));
@@ -250,6 +249,109 @@ void Lab1_3::setSize(int ots) {
 	//ui.gabXLine->resize(width() / 4 - ots, height() - ots * 3);
 	//ui.gabYLine->resize(width() / 4 - ots, height() - ots * 3);
 	//ui.angleLine->resize();
+}
+
+void Lab1_3::doVisible1() {
+
+	if (ui.groupField->isVisible())
+		ui.groupField->setVisible(false);
+	else  {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(true);
+		ui.changeField->setVisible(false);
+	}
+}
+
+void Lab1_3::doVisible2() {
+
+	if (ui.groupCar->isVisible() && !(ui.but7_3->isVisible()))
+		ui.groupCar->setVisible(false);
+	else {
+		ui.groupCar->setVisible(true);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		//iDo2();
+	}
+}
+
+void Lab1_3::doVisible3() {
+
+	if (ui.groupPres->isVisible() && !(ui.comboPress_3->isVisible()))
+		ui.groupPres->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(true);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		//iDo3();
+	}
+}
+
+void Lab1_3::doVisible4() {
+
+	if (ui.changeField->isVisible())
+		ui.changeField->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(true);
+	}
+}
+
+void Lab1_3::doVisible5() {
+
+	if (ui.groupCar->isVisible() && ui.but7_3->isVisible())
+		ui.groupCar->setVisible(false);
+	else {
+		ui.groupCar->setVisible(true);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		ui.but7_3->setVisible(true);
+		ui.comboBoxCar_3->setVisible(true);
+		//iDo5();
+		ui.but5_3->setText(QString::fromLocal8Bit("change"));
+		disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
+		connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
+	}
+}
+
+void Lab1_3::doVisible6() {
+
+	if (ui.groupPres->isVisible() && ui.comboPress_3->isVisible())
+		ui.groupPres->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(true);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		ui.comboPress_3->setVisible(true);
+		ui.but8_3->setVisible(true);
+		//iDo6();
+		ui.but3_3->setText(QString::fromLocal8Bit("change"));
+		disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
+		connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+	}
+}
+
+void Lab1_3::reduce() {
+	if (_btns)
+	{
+		_btns = false;
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.btnGroup->setVisible(false);
+	}
+	else {
+
+		ui.btnGroup->setVisible(true);
+		_btns = true;
+	}
+	update();
 }
 
 QPolygonF Lab1_3::rectMy(qreal a, qreal b, const  QPointF& center, float alpha) {
