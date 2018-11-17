@@ -17,8 +17,8 @@
    <widget class="QGroupBox" name="groupField">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>20</y>
+      <x>270</x>
+      <y>40</y>
       <width>221</width>
       <height>271</height>
      </rect>
@@ -66,8 +66,8 @@
    <widget class="QGroupBox" name="groupPres">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>290</y>
+      <x>520</x>
+      <y>120</y>
       <width>281</width>
       <height>281</height>
      </rect>
@@ -207,10 +207,10 @@
    <widget class="QGroupBox" name="btnGroup">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>30</y>
-      <width>271</width>
-      <height>211</height>
+      <x>480</x>
+      <y>500</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="title">
@@ -351,10 +351,10 @@
    <widget class="QGroupBox" name="changeField">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>430</y>
-      <width>201</width>
-      <height>271</height>
+      <x>610</x>
+      <y>490</y>
+      <width>101</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="title">
@@ -377,20 +377,6 @@
        <widget class="QPushButton" name="delAll_3">
         <property name="text">
          <string>удалить все</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="delAllCars_3">
-        <property name="text">
-         <string>удалить все машины</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="delAllPres_3">
-        <property name="text">
-         <string>удалить все стенды</string>
         </property>
        </widget>
       </item>
@@ -445,9 +431,6 @@
       <property name="rightMargin">
        <number>0</number>
       </property>
-      <item>
-       <widget class="QComboBox" name="comboBox_3"/>
-      </item>
       <item>
        <widget class="QComboBox" name="comboBoxCar_3"/>
       </item>
@@ -604,6 +587,8 @@
       </item>
      </layout>
     </widget>
+    <zorder>verticalLayoutWidget_15</zorder>
+    <zorder>changeField</zorder>
    </widget>
    <widget class="QPushButton" name="reduceBut">
     <property name="geometry">

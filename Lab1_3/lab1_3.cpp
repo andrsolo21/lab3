@@ -156,10 +156,10 @@ void Lab1_3::coonections() {
 	connect(ui.but4, SIGNAL(clicked()), this, SLOT(cancelPres()));
 	connect(ui.but8, SIGNAL(clicked()), this, SLOT(deleteThisPres()));*/
 
-	/*connect(ui.comboPress, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
+	connect(ui.comboPress_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
 	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
-	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboCar(int)));
-	connect(ui.comboBoxCar, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));*/
+	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboCar(int)));
+	connect(ui.comboBoxCar_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));
 
 	/*connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
@@ -198,8 +198,8 @@ void Lab1_3::setSize(int ots) {
 	ui.lineEdit_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.but_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.delAll_3->setFixedSize(width() / 4 - 4 * ots, hig);
-	ui.delAllCars_3->setFixedSize(width() / 4 - 4 * ots, hig);
-	ui.delAllPres_3->setFixedSize(width() / 4 - 4 * ots, hig);
+	//ui.delAllCars_3->setFixedSize(width() / 4 - 4 * ots, hig);
+	//ui.delAllPres_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.strToFile_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.printBtn_3->setFixedSize(width() / 4 - 4 * ots, hig);
 
@@ -214,7 +214,7 @@ void Lab1_3::setSize(int ots) {
 
 	ui.groupCar->setGeometry(a);
 
-	ui.comboBox_3->setFixedSize(width() / 4 - 4 * ots, hig);
+	//ui.comboBox_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.comboBoxCar_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.nameAddLine_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.angleLine_3->setFixedSize(width() / 4 - 4 * ots, hig);
@@ -251,6 +251,37 @@ void Lab1_3::setSize(int ots) {
 	//ui.angleLine->resize();
 }
 
+void Lab1_3::comboCar() {
+	ui.comboBoxCar_3->clear();
+	ui.comboBoxCar_3->setEnabled(true);
+	int count = 0;
+	for (auto i = 0; i < _motors->getCount(); i++) {
+		if ((*(*_motors)[i])->getType()) {
+			count++;
+			ui.comboBoxCar_3->addItem(((*(*_motors)[i])->getName()) + " Num: " +  QString::number(i), QVariant(i));
+		}
+	}
+	if (count == 0) {
+		ui.comboBoxCar_3->setEnabled(false);
+	}
+
+}
+
+void Lab1_3::comboPres() {
+	ui.comboPress_3->clear();
+	ui.comboPress_3->setEnabled(true);
+	int count = 0;
+	for (auto i = 0; i < _motors->getCount(); i++) {
+		if (!((*(*_motors)[i])->getType())) {
+			count++;
+			ui.comboPress_3->addItem(((*(*_motors)[i])->getName()) + " Num: " + QString::number(i), QVariant::fromValue(*(*_motors)[i]));
+		}
+	}
+	if (count == 0) {
+		ui.comboPress_3->setEnabled(false);
+	}
+}
+
 void Lab1_3::doVisible1() {
 
 	if (ui.groupField->isVisible())
@@ -272,7 +303,7 @@ void Lab1_3::doVisible2() {
 		ui.groupPres->setVisible(false);
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
-		//iDo2();
+		iDo2();
 	}
 }
 
@@ -285,7 +316,7 @@ void Lab1_3::doVisible3() {
 		ui.groupPres->setVisible(true);
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
-		//iDo3();
+		iDo3();
 	}
 }
 
@@ -312,10 +343,11 @@ void Lab1_3::doVisible5() {
 		ui.changeField->setVisible(false);
 		ui.but7_3->setVisible(true);
 		ui.comboBoxCar_3->setVisible(true);
-		//iDo5();
+		comboCar();
+		iDo5();
 		ui.but5_3->setText(QString::fromLocal8Bit("change"));
-		disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
-		connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
+		//disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
+		//connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
 	}
 }
 
@@ -332,8 +364,131 @@ void Lab1_3::doVisible6() {
 		ui.but8_3->setVisible(true);
 		//iDo6();
 		ui.but3_3->setText(QString::fromLocal8Bit("change"));
-		disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
-		connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+		comboPres();
+		//disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
+		//connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+	}
+}
+
+void Lab1_3::iDo2() {
+	ui.but7_3->setVisible(false);
+	ui.comboBoxCar_3->setVisible(false);
+
+	ui.nameAddLine_3->setEnabled(true);
+	ui.angleLine_3->setEnabled(true);
+	ui.coordXLine_3->setEnabled(true);
+	ui.gabXLine_3->setEnabled(true);
+	ui.coordYLine_3->setEnabled(true);
+	ui.gabYLine_3->setEnabled(true);
+	ui.but2_3->setEnabled(true);
+	ui.but5_3->setEnabled(true);
+
+	ui.nameAddLine_3->clear();
+	ui.angleLine_3->clear();
+	ui.coordXLine_3->clear();
+	ui.gabXLine_3->clear();
+	ui.coordYLine_3->clear();
+	ui.gabYLine_3->clear();
+	ui.but2_3->setText(QString::fromLocal8Bit("add"));
+	//disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
+	//connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
+}
+
+void Lab1_3::iDo3() {
+	ui.namePresLine_3->setEnabled(true);
+	ui.radiusPresLine_3->setEnabled(true);
+	ui.coordPresX_3->setEnabled(true);
+	ui.coordPresY_3->setEnabled(true);
+	ui.but3_3->setEnabled(true);
+	ui.but4_3->setEnabled(true);
+
+	ui.comboPress_3->setVisible(false);
+	ui.but8_3->setVisible(false);
+
+	ui.namePresLine_3->clear();
+	ui.radiusPresLine_3->clear();
+	ui.coordPresX_3->clear();
+	ui.coordPresY_3->clear();
+	ui.but3_3->setText(QString::fromLocal8Bit("add"));
+	//disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+	//connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
+}
+
+void Lab1_3::iDo5(int k) {	
+	
+	if (ui.comboBoxCar_3->isEnabled()) {
+		NoCar * car;
+		int index = ui.comboBoxCar_3->currentData().toInt();
+		car = *((*_motors)[index]);
+		ui.nameAddLine_3->setEnabled(true);
+		ui.angleLine_3->setEnabled(true);
+		ui.coordXLine_3->setEnabled(true);
+		ui.gabXLine_3->setEnabled(true);
+		ui.coordYLine_3->setEnabled(true);
+		ui.gabYLine_3->setEnabled(true);
+		ui.but2_3->setEnabled(true);
+		ui.but5_3->setEnabled(true);
+
+		ui.nameAddLine_3->setText(car->getName());
+		ui.angleLine_3->setText(QString::number(car->getAngle()));
+		ui.coordXLine_3->setText(QString::number(car->getCoord(0)));
+		ui.gabXLine_3->setText(QString::number(car->getSize(0)));
+		ui.coordYLine_3->setText(QString::number(car->getCoord(1)));
+		ui.gabYLine_3->setText(QString::number(car->getSize(1)));
+	}
+	else {
+		ui.nameAddLine_3->clear();
+		ui.angleLine_3->clear();
+		ui.coordXLine_3->clear();
+		ui.gabXLine_3->clear();
+		ui.coordYLine_3->clear();
+		ui.gabYLine_3->clear();
+		ui.nameAddLine_3->setEnabled(false);
+		ui.angleLine_3->setEnabled(false);
+		ui.coordXLine_3->setEnabled(false);
+		ui.gabXLine_3->setEnabled(false);
+		ui.coordYLine_3->setEnabled(false);
+		ui.gabYLine_3->setEnabled(false);
+		ui.but2_3->setEnabled(false);
+		ui.but5_3->setEnabled(false);
+		ui.but7_3->setEnabled(false);
+	}
+}
+
+void Lab1_3::iDo6(int k) {
+	if (ui.comboPress_3->isEnabled()) {
+		ui.namePresLine_3->setEnabled(true);
+		ui.radiusPresLine_3->setEnabled(true);
+		ui.coordPresX_3->setEnabled(true);
+		ui.coordPresY_3->setEnabled(true);
+		ui.but3_3->setEnabled(true);
+		ui.but4_3->setEnabled(true);
+		ui.but8_3->setEnabled(true);
+		
+		int index = ui.comboBoxCar_3->currentData().toInt();
+		//NoCar * car = car = *((*_motors)[index]);
+		QVariant variant = ui.comboBoxCar_3->itemData(index);
+		NoCar* car = variant.value<NoCar*>();
+
+		NoCar * car2 = ui.comboBoxCar_3->currentData(index).value<NoCar*>();
+
+		ui.namePresLine_3->setText(car->getName());
+		ui.radiusPresLine_3->setText(QString::number((car->getR())));
+		ui.coordPresX_3->setText(QString::number(car->getCoord(0)));
+		ui.coordPresY_3->setText(QString::number(car->getCoord(1)));
+	}
+	else {
+		ui.namePresLine_3->clear();
+		ui.radiusPresLine_3->clear();
+		ui.coordPresX_3->clear();
+		ui.coordPresY_3->clear();
+		ui.namePresLine_3->setEnabled(false);
+		ui.radiusPresLine_3->setEnabled(false);
+		ui.coordPresX_3->setEnabled(false);
+		ui.coordPresY_3->setEnabled(false);
+		ui.but3_3->setEnabled(false);
+		ui.but4_3->setEnabled(false);
+		ui.but8_3->setEnabled(false);
 	}
 }
 

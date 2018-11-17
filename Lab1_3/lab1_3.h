@@ -25,6 +25,12 @@ public slots:
 	void doVisible5();
 	void doVisible6();
 	void reduce();
+	void iDo6(int k = 1);
+	void iDo5(int k = 1);
+	void iDo3();
+	void iDo2();
+
+	void comboPres();
 
 private:
 	Ui::Lab1_3Class ui;
@@ -32,7 +38,7 @@ private:
 	float _otn = 1;
 	MotorShow *_motors = NULL;
 	bool _btns = true;
-
+	void comboCar();
 	QPolygonF rectMy(qreal a, qreal b, const  QPointF& center, float alpha);
 	void paintEvent(QPaintEvent *event);
 	void setSize(int ots);

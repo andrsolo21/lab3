@@ -76,15 +76,12 @@ public:
     QWidget *verticalLayoutWidget_14;
     QVBoxLayout *verticalLayout_14;
     QPushButton *delAll_3;
-    QPushButton *delAllCars_3;
-    QPushButton *delAllPres_3;
     QLabel *label_29;
     QLineEdit *strToFile_3;
     QPushButton *printBtn_3;
     QGroupBox *groupCar;
     QWidget *verticalLayoutWidget_15;
     QVBoxLayout *verticalLayout_15;
-    QComboBox *comboBox_3;
     QComboBox *comboBoxCar_3;
     QLabel *label_30;
     QLineEdit *nameAddLine_3;
@@ -116,7 +113,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupField = new QGroupBox(centralWidget);
         groupField->setObjectName(QStringLiteral("groupField"));
-        groupField->setGeometry(QRect(230, 20, 221, 271));
+        groupField->setGeometry(QRect(270, 40, 221, 271));
         verticalLayoutWidget_11 = new QWidget(groupField);
         verticalLayoutWidget_11->setObjectName(QStringLiteral("verticalLayoutWidget_11"));
         verticalLayoutWidget_11->setGeometry(QRect(10, 20, 281, 71));
@@ -143,7 +140,7 @@ public:
 
         groupPres = new QGroupBox(centralWidget);
         groupPres->setObjectName(QStringLiteral("groupPres"));
-        groupPres->setGeometry(QRect(460, 290, 281, 281));
+        groupPres->setGeometry(QRect(520, 120, 281, 281));
         verticalLayoutWidget_12 = new QWidget(groupPres);
         verticalLayoutWidget_12->setObjectName(QStringLiteral("verticalLayoutWidget_12"));
         verticalLayoutWidget_12->setGeometry(QRect(10, 20, 211, 254));
@@ -232,7 +229,7 @@ public:
 
         btnGroup = new QGroupBox(centralWidget);
         btnGroup->setObjectName(QStringLiteral("btnGroup"));
-        btnGroup->setGeometry(QRect(490, 30, 271, 211));
+        btnGroup->setGeometry(QRect(480, 500, 91, 51));
         verticalLayoutWidget_13 = new QWidget(btnGroup);
         verticalLayoutWidget_13->setObjectName(QStringLiteral("verticalLayoutWidget_13"));
         verticalLayoutWidget_13->setGeometry(QRect(10, 20, 211, 141));
@@ -317,7 +314,7 @@ public:
 
         changeField = new QGroupBox(centralWidget);
         changeField->setObjectName(QStringLiteral("changeField"));
-        changeField->setGeometry(QRect(10, 430, 201, 271));
+        changeField->setGeometry(QRect(610, 490, 101, 71));
         verticalLayoutWidget_14 = new QWidget(changeField);
         verticalLayoutWidget_14->setObjectName(QStringLiteral("verticalLayoutWidget_14"));
         verticalLayoutWidget_14->setGeometry(QRect(10, 30, 261, 157));
@@ -331,16 +328,6 @@ public:
         delAll_3->setObjectName(QStringLiteral("delAll_3"));
 
         verticalLayout_14->addWidget(delAll_3);
-
-        delAllCars_3 = new QPushButton(verticalLayoutWidget_14);
-        delAllCars_3->setObjectName(QStringLiteral("delAllCars_3"));
-
-        verticalLayout_14->addWidget(delAllCars_3);
-
-        delAllPres_3 = new QPushButton(verticalLayoutWidget_14);
-        delAllPres_3->setObjectName(QStringLiteral("delAllPres_3"));
-
-        verticalLayout_14->addWidget(delAllPres_3);
 
         label_29 = new QLabel(verticalLayoutWidget_14);
         label_29->setObjectName(QStringLiteral("label_29"));
@@ -369,11 +356,6 @@ public:
         verticalLayout_15->setObjectName(QStringLiteral("verticalLayout_15"));
         verticalLayout_15->setSizeConstraint(QLayout::SetMinAndMaxSize);
         verticalLayout_15->setContentsMargins(0, 0, 0, 0);
-        comboBox_3 = new QComboBox(verticalLayoutWidget_15);
-        comboBox_3->setObjectName(QStringLiteral("comboBox_3"));
-
-        verticalLayout_15->addWidget(comboBox_3);
-
         comboBoxCar_3 = new QComboBox(verticalLayoutWidget_15);
         comboBoxCar_3->setObjectName(QStringLiteral("comboBoxCar_3"));
 
@@ -477,6 +459,8 @@ public:
 
         verticalLayout_15->addWidget(but7_3);
 
+        verticalLayoutWidget_15->raise();
+        changeField->raise();
         reduceBut = new QPushButton(centralWidget);
         reduceBut->setObjectName(QStringLiteral("reduceBut"));
         reduceBut->setGeometry(QRect(0, 0, 31, 16));
@@ -516,8 +500,6 @@ public:
         changePressBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
         changeField->setTitle(QApplication::translate("Lab1_3Class", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\277\320\276\320\273\320\265", Q_NULLPTR));
         delAll_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265", Q_NULLPTR));
-        delAllCars_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \320\274\320\260\321\210\320\270\320\275\321\213", Q_NULLPTR));
-        delAllPres_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \321\201\321\202\320\265\320\275\320\264\321\213", Q_NULLPTR));
         label_29->setText(QApplication::translate("Lab1_3Class", "\320\277\320\265\321\207\320\260\321\202\321\214 \320\262 \321\204\320\260\320\271\320\273", Q_NULLPTR));
         printBtn_3->setText(QApplication::translate("Lab1_3Class", "\320\277\320\265\321\207\320\260\321\202\321\214", Q_NULLPTR));
         groupCar->setTitle(QApplication::translate("Lab1_3Class", "\320\234\320\260\321\210\320\270\320\275\320\260", Q_NULLPTR));

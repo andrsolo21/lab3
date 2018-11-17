@@ -30,4 +30,5 @@ protected:
 	float _coord[2], _r;
 
 };
+Q_DECLARE_METATYPE(NoCar*)
 
