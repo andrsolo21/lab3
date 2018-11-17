@@ -150,20 +150,16 @@ void Lab1_3::coonections() {
 	connect(ui.changeCarBut_3, SIGNAL(clicked()), this, SLOT(doVisible5()));
 	connect(ui.changePressBut_3, SIGNAL(clicked()), this, SLOT(doVisible6()));
 
-	/*connect(ui.but5, SIGNAL(clicked()), this, SLOT(cancelCar()));
-	connect(ui.but7, SIGNAL(clicked()), this, SLOT(deleteThisCar()));
+	connect(ui.but5_3, SIGNAL(clicked()), this, SLOT(cancel()));
+	connect(ui.but7_3, SIGNAL(clicked()), this, SLOT(deleteCar()));
 
-	connect(ui.but4, SIGNAL(clicked()), this, SLOT(cancelPres()));
-	connect(ui.but8, SIGNAL(clicked()), this, SLOT(deleteThisPres()));*/
+	connect(ui.but4_3, SIGNAL(clicked()), this, SLOT(cancel()));
+	connect(ui.but8_3, SIGNAL(clicked()), this, SLOT(deletePres()));
 
 	connect(ui.comboPress_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
-	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
-	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboCar(int)));
 	connect(ui.comboBoxCar_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));
 
-	/*connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
-	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
-	connect(ui.delAll, SIGNAL(clicked()), this, SLOT(deleteAll()));*/
+	//connect(ui.delAll_3, SIGNAL(clicked()), this, SLOT(deleteAll()));
 
 
 	//connect(ui.comboBox, SIGNAL(activated(int)), this, SLOT(comboSelectItem(int)));
@@ -274,13 +270,110 @@ void Lab1_3::comboPres() {
 	for (auto i = 0; i < _motors->getCount(); i++) {
 		if (!((*(*_motors)[i])->getType())) {
 			count++;
-			ui.comboPress_3->addItem(((*(*_motors)[i])->getName()) + " Num: " + QString::number(i), QVariant::fromValue(*(*_motors)[i]));
+			ui.comboPress_3->addItem(((*(*_motors)[i])->getName()) + " Num: " + QString::number(i), QVariant(i));
 		}
 	}
 	if (count == 0) {
 		ui.comboPress_3->setEnabled(false);
 	}
 }
+
+void Lab1_3::cancel() {
+	ui.groupCar->setVisible(false);
+	ui.groupPres->setVisible(false);
+}
+
+
+Car * Lab1_3::getCar() {
+	float coord[2], gabarites[2], angle;
+	bool ok[5];
+	coord[0] = (ui.coordXLine_3->text()).toFloat(&ok[0]);
+	coord[1] = (ui.coordYLine_3->text()).toFloat(&ok[1]);
+	gabarites[0] = (ui.gabXLine_3->text()).toFloat(&ok[2]);
+	gabarites[1] = (ui.gabYLine_3->text()).toFloat(&ok[3]);
+	QString name = ui.nameAddLine_3->text();
+	angle = (ui.angleLine_3->text()).toFloat(&ok[4]);
+	Car * car = NULL;
+	if ((!name.isEmpty()) && ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
+		car = new Car(name, angle, gabarites, coord);
+	}
+	return car;
+}
+
+void Lab1_3::deleteCar() {
+	int index = ui.comboBoxCar_3->currentData().toInt();
+	_motors->deleteElement(index);
+	update();
+	comboCar();
+	iDo5();
+}
+
+void Lab1_3::setCar() {
+	Car * car = getCar();
+	if (car) {
+		_motors->addEl(car);
+	}
+	update();
+}
+
+void Lab1_3::changeCar() {
+	Car * car = getCar();
+	if (car) {
+		int index = ui.comboBoxCar_3->currentData().toInt();
+		_motors->changeEl(car, index);
+	}
+	update();
+}
+
+
+NoCar * Lab1_3::getPres() {
+	float coord[2], radius;
+	bool ok1, ok2, ok3;
+	//int index = ui.comboBox->currentData().toInt();
+	coord[0] = (ui.coordPresX_3->text()).toFloat(&ok1);
+	coord[1] = (ui.coordPresY_3->text()).toFloat(&ok2);
+	QString name = ui.namePresLine_3->text();
+	radius = (ui.radiusPresLine_3->text()).toFloat(&ok3);
+	NoCar * noCar = NULL;
+	if ((!name.isEmpty()) && ok1 && ok2 && ok3) {
+		noCar = new NoCar(name,radius, coord);
+	}
+	return noCar;
+}
+
+void Lab1_3::deletePres() {
+	int i, index = ui.comboBoxCar_3->currentData().toInt();
+	for (i = 0; i < _motors->getCount() && index >= 0; i++)
+		if (!((*((*_motors)[i]))->getType()))
+			index--;
+	_motors->deleteElement(i - 1);
+	update();
+	comboPres();
+	iDo6();
+}
+
+void Lab1_3::setPres() {
+	NoCar * noCar = getCar();
+	if (noCar)
+	{
+		_motors->addEl(noCar);
+	}
+	update();
+}
+
+void Lab1_3::changePres() {
+	NoCar * noCar = getPres();
+	if (noCar) {
+		int i, index = ui.comboBoxCar_3->currentData().toInt();
+		for (i = 0; i < _motors->getCount() && index >= 0; i++)
+			if (!((*((*_motors)[i]))->getType()))
+				index--;
+		int index = ui.comboBoxCar_3->currentData().toInt();
+		_motors->changeEl(noCar, i-1);
+	}
+	update();
+}
+
 
 void Lab1_3::doVisible1() {
 
@@ -369,6 +462,7 @@ void Lab1_3::doVisible6() {
 		//connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
 }
+
 
 void Lab1_3::iDo2() {
 	ui.but7_3->setVisible(false);
@@ -465,13 +559,11 @@ void Lab1_3::iDo6(int k) {
 		ui.but4_3->setEnabled(true);
 		ui.but8_3->setEnabled(true);
 		
-		int index = ui.comboBoxCar_3->currentData().toInt();
-		//NoCar * car = car = *((*_motors)[index]);
-		QVariant variant = ui.comboBoxCar_3->itemData(index);
-		NoCar* car = variant.value<NoCar*>();
-
-		NoCar * car2 = ui.comboBoxCar_3->currentData(index).value<NoCar*>();
-
+		int i, index = ui.comboBoxCar_3->currentData().toInt();
+		for (i = 0; i < _motors->getCount() && index >= 0; i++)
+			if (!((*((*_motors)[i]))->getType()))
+				index--;
+		NoCar * car = *((*_motors)[i-1]);
 		ui.namePresLine_3->setText(car->getName());
 		ui.radiusPresLine_3->setText(QString::number((car->getR())));
 		ui.coordPresX_3->setText(QString::number(car->getCoord(0)));
@@ -491,6 +583,7 @@ void Lab1_3::iDo6(int k) {
 		ui.but8_3->setEnabled(false);
 	}
 }
+
 
 void Lab1_3::reduce() {
 	if (_btns)

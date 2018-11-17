@@ -12,7 +12,6 @@ class MotorShow
 
 public:
 	MotorShow();
-	//MotorShow(Car * addData[], int addCount, float addGabarits[]);
 	MotorShow(const MotorShow & addData);
 	MotorShow(std::string f);
 	~MotorShow();
@@ -20,12 +19,10 @@ public:
 
 	int getCount() const;
 	void addEl(NoCar * element);
-	//void addEl(Car * element);
 	void deleteElement(int i);
-
+	void changeEl(NoCar * noCar,int c);
 	NoCar ** operator[](int c) const;
 	float getGabarits(int i) const;
-
 	void exportToFile(QString name);
 
 protected:
@@ -43,6 +40,5 @@ protected:
 	bool checkGabarits(float dots1[][2]);
 
 	float _gabarits[2];
-
 };
 

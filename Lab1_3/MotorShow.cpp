@@ -148,6 +148,25 @@ void MotorShow::deleteAll() {
 	_grr = 0;
 }
 
+void MotorShow::changeEl(NoCar * noCar, int c) {
+	if (c >= 0 && c < getCount()) {
+		NoCar  oldEl = **(_head + c);
+		deleteElement(c);
+		if (checkEl(*noCar)) {
+			_tail++;
+			for (auto i = _tail; i > (_head + c); i--)
+				*i = *(i - 1);
+			*(_head + c) = noCar;
+		}
+		else {
+			_tail++;
+			for (auto i = _tail; i > (_head + c); i--)
+				*i = *(i - 1);
+			*(_head + c) = &oldEl;
+		}
+	}
+}
+
 void MotorShow::grow10(int zn) {
 	if (_grr == 0 || _tail - _head >= 10 * _grr - zn) {
 		int startNum = 0;

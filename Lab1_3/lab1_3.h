@@ -29,8 +29,14 @@ public slots:
 	void iDo5(int k = 1);
 	void iDo3();
 	void iDo2();
-
+	void setCar();
+	void setPres();
 	void comboPres();
+	void cancel();
+	void deleteCar();
+	void deletePres();
+	void changeCar();
+	void changePres();
 
 private:
 	Ui::Lab1_3Class ui;
@@ -43,4 +49,7 @@ private:
 	void paintEvent(QPaintEvent *event);
 	void setSize(int ots);
 	void coonections();
+	NoCar * getPres();
+	Car * getCar();
+	
 };
