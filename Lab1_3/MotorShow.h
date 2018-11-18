@@ -24,7 +24,7 @@ public:
 	NoCar ** operator[](int c) const;
 	float getGabarits(int i) const;
 	void exportToFile(QString name);
-
+	void setGabarits(float babs[]);
 protected:
 	NoCar **_head, **_tail;
 	int _grr = 0;

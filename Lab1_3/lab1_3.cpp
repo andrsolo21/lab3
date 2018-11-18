@@ -14,8 +14,17 @@ Lab1_3::Lab1_3(QWidget *parent)
 	ui.groupField->setVisible(false);
 	ui.changeField->setVisible(false);
 	ui.btnGroup->setVisible(true);
-	coonections();
-	slotBut();
+	setEnabledMenu(false);
+	coonections();	
+	radioGabsC();
+}
+
+void Lab1_3::setEnabledMenu(bool value) {
+	ui.changeFieldBut_3->setEnabled(value);
+	ui.addCarBut_3->setEnabled(value);
+	ui.changeCarBut_3->setEnabled(value);
+	ui.addPresBut_3->setEnabled(value);
+	ui.changePressBut_3->setEnabled(value);
 }
 
 void Lab1_3::paintEvent(QPaintEvent *event)
@@ -84,27 +93,7 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 		painter.setBrush(QBrush(Qt::white));
 	}
 	painter.drawPolygon(fon);
-	/*if (_motors != NULL) {
-		for (int i = 0; i < _motors->getCountP(); i++) {
-			painter.setBrush(QBrush(Qt::blue));
-			center2 = QPointF((_motors->getPres(i)).getCoord(0) * _otn + center.x() - gabs[0] / 2,
-				(_motors->getPres(i)).getCoord(1)* _otn + center.y() - gabs[1] / 2);
-
-			painter.drawEllipse(center2, (_motors->getPres(i)).getR() * _otn, (_motors->getPres(i)).getR() * _otn);
-
-			painter.setBrush(QBrush(Qt::green));
-			for (int j = 0; j < (_motors->getPres(i)).getCount(); j++) {
-
-				center3 = QPointF((_motors->getPres(i))[j].getCoord(0) * _otn + center2.x(),
-					(_motors->getPres(i))[j].getCoord(1)* _otn + center2.y());
-
-				polygon = rectMy((_motors->getPres(i))[j].getSize(0) * _otn, (_motors->getPres(i))[j].getSize(1) * _otn,
-					center3, (_motors->getPres(i))[j].getAngle());
-				painter.drawPolygon(polygon);
-			}
-		}
-	}*/
-
+	
 	//main drawing
 	Car * tempCar;
 	NoCar  tempNoCar;
@@ -149,7 +138,9 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 }
 
 void Lab1_3::coonections() {
-	connect(ui.but_3, SIGNAL(clicked()), this, SLOT(slotBut()));
+	connect(ui.radioRazm, SIGNAL(clicked()), this, SLOT(radioGabsC()));
+	connect(ui.radioFile, SIGNAL(clicked()), this, SLOT(radioFileC()));
+
 	connect(ui.printBtn_3, SIGNAL(clicked()), this, SLOT(printToFile()));
 	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
 
@@ -184,10 +175,53 @@ void Lab1_3::slotBut() {
 		_motors = new MotorShow(s);
 		_gabarits[0] = _motors->getGabarits(0);
 		_gabarits[1] = _motors->getGabarits(1);
-		//comboboxAdd();
+		setEnabledMenu(true);
 		update();
 	}
 }
+
+void Lab1_3::getGabs() {
+	bool ok1, ok2;
+	float gabs[2];
+	gabs[0] = (ui.fieldGabsX->text()).toFloat(&ok1);
+	gabs[1] = (ui.fieldGabsY->text()).toFloat(&ok2);
+	if (ok1 && ok2) {
+		delete _motors;
+		_motors = new MotorShow;
+		_motors->setGabarits(gabs);
+		_gabarits[0] = gabs[0];
+		_gabarits[1] = gabs[1];
+		setEnabledMenu(true);
+		update();
+		ui.fieldGabsX->clear();
+		ui.fieldGabsY->clear();
+	}
+}
+
+void Lab1_3::radioGabsC() {
+	ui.fieldGabsX->setEnabled(true);
+	ui.fieldGabsY->setEnabled(true); 
+	ui.lineEdit_3->setEnabled(false);
+	disconnect(ui.but_3, SIGNAL(clicked()), this, SLOT(slotBut()));
+	connect(ui.but_3, SIGNAL(clicked()), this, SLOT(getGabs()));
+}
+
+void Lab1_3::radioFileC() {
+	ui.fieldGabsX->setEnabled(false);
+	ui.fieldGabsY->setEnabled(false);
+	ui.lineEdit_3->setEnabled(true);
+	disconnect(ui.but_3, SIGNAL(clicked()), this, SLOT(getGabs()));
+	connect(ui.but_3, SIGNAL(clicked()), this, SLOT(slotBut()));
+}
+
+void Lab1_3::deleteAll() {
+	_motors->deleteAll();
+	setEnabledMenu(false);
+	_gabarits[0] = 0;
+	_gabarits[1] = 0;
+	update();
+} 
+
 
 void Lab1_3::setSize(int ots) {
 	int w = width(), h = height();
@@ -208,6 +242,12 @@ void Lab1_3::setSize(int ots) {
 	//ui.delAllPres_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.strToFile_3->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.printBtn_3->setFixedSize(width() / 4 - 4 * ots, hig);
+
+	ui.radioRazm->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.radioFile->setFixedSize(width() / 4 - 4 * ots, hig);
+
+	ui.fieldGabsX->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.fieldGabsY->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 
 
 	ui.changeField->setGeometry(a);
@@ -464,9 +504,10 @@ void Lab1_3::doVisible6() {
 		ui.changeField->setVisible(false);
 		ui.comboPress_3->setVisible(true);
 		ui.but8_3->setVisible(true);
+		comboPres();
 		iDo6();
 		ui.but3_3->setText(QString::fromLocal8Bit("change"));
-		comboPres();
+		
 		disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
 		connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}

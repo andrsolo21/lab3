@@ -21,6 +21,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -34,7 +35,12 @@ public:
     QGroupBox *groupField;
     QWidget *verticalLayoutWidget_11;
     QVBoxLayout *verticalLayout_11;
-    QLabel *label_23;
+    QRadioButton *radioRazm;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *fieldGabsX;
+    QLineEdit *fieldGabsY;
+    QSpacerItem *horizontalSpacer;
+    QRadioButton *radioFile;
     QLineEdit *lineEdit_3;
     QPushButton *but_3;
     QGroupBox *groupPres;
@@ -55,23 +61,6 @@ public:
     QPushButton *but3_3;
     QSpacerItem *horizontalSpacer_18;
     QPushButton *but8_3;
-    QGroupBox *btnGroup;
-    QWidget *verticalLayoutWidget_13;
-    QVBoxLayout *verticalLayout_13;
-    QHBoxLayout *horizontalLayout_19;
-    QPushButton *addFieldBut_3;
-    QPushButton *changeFieldBut_3;
-    QSpacerItem *horizontalSpacer_19;
-    QLabel *label_27;
-    QHBoxLayout *horizontalLayout_20;
-    QPushButton *addCarBut_3;
-    QPushButton *changeCarBut_3;
-    QSpacerItem *horizontalSpacer_20;
-    QLabel *label_28;
-    QHBoxLayout *horizontalLayout_21;
-    QPushButton *addPresBut_3;
-    QPushButton *changePressBut_3;
-    QSpacerItem *horizontalSpacer_21;
     QGroupBox *changeField;
     QWidget *verticalLayoutWidget_14;
     QVBoxLayout *verticalLayout_14;
@@ -103,6 +92,23 @@ public:
     QSpacerItem *horizontalSpacer_24;
     QPushButton *but7_3;
     QPushButton *reduceBut;
+    QGroupBox *btnGroup;
+    QWidget *verticalLayoutWidget_13;
+    QVBoxLayout *verticalLayout_13;
+    QHBoxLayout *horizontalLayout_19;
+    QPushButton *addFieldBut_3;
+    QPushButton *changeFieldBut_3;
+    QSpacerItem *horizontalSpacer_19;
+    QLabel *label_27;
+    QHBoxLayout *horizontalLayout_20;
+    QPushButton *addCarBut_3;
+    QPushButton *changeCarBut_3;
+    QSpacerItem *horizontalSpacer_20;
+    QLabel *label_28;
+    QHBoxLayout *horizontalLayout_21;
+    QPushButton *addPresBut_3;
+    QPushButton *changePressBut_3;
+    QSpacerItem *horizontalSpacer_21;
 
     void setupUi(QMainWindow *Lab1_3Class)
     {
@@ -113,20 +119,47 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupField = new QGroupBox(centralWidget);
         groupField->setObjectName(QStringLiteral("groupField"));
-        groupField->setGeometry(QRect(270, 40, 221, 271));
+        groupField->setGeometry(QRect(130, 20, 221, 271));
         verticalLayoutWidget_11 = new QWidget(groupField);
         verticalLayoutWidget_11->setObjectName(QStringLiteral("verticalLayoutWidget_11"));
-        verticalLayoutWidget_11->setGeometry(QRect(10, 20, 281, 71));
+        verticalLayoutWidget_11->setGeometry(QRect(10, 20, 201, 141));
         verticalLayout_11 = new QVBoxLayout(verticalLayoutWidget_11);
         verticalLayout_11->setSpacing(6);
         verticalLayout_11->setContentsMargins(11, 11, 11, 11);
         verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
         verticalLayout_11->setSizeConstraint(QLayout::SetMinAndMaxSize);
         verticalLayout_11->setContentsMargins(0, 0, 0, 0);
-        label_23 = new QLabel(verticalLayoutWidget_11);
-        label_23->setObjectName(QStringLiteral("label_23"));
+        radioRazm = new QRadioButton(verticalLayoutWidget_11);
+        radioRazm->setObjectName(QStringLiteral("radioRazm"));
+        radioRazm->setChecked(true);
 
-        verticalLayout_11->addWidget(label_23);
+        verticalLayout_11->addWidget(radioRazm);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        fieldGabsX = new QLineEdit(verticalLayoutWidget_11);
+        fieldGabsX->setObjectName(QStringLiteral("fieldGabsX"));
+
+        horizontalLayout->addWidget(fieldGabsX);
+
+        fieldGabsY = new QLineEdit(verticalLayoutWidget_11);
+        fieldGabsY->setObjectName(QStringLiteral("fieldGabsY"));
+
+        horizontalLayout->addWidget(fieldGabsY);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+
+        verticalLayout_11->addLayout(horizontalLayout);
+
+        radioFile = new QRadioButton(verticalLayoutWidget_11);
+        radioFile->setObjectName(QStringLiteral("radioFile"));
+
+        verticalLayout_11->addWidget(radioFile);
 
         lineEdit_3 = new QLineEdit(verticalLayoutWidget_11);
         lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
@@ -143,7 +176,7 @@ public:
         groupPres->setGeometry(QRect(520, 120, 281, 281));
         verticalLayoutWidget_12 = new QWidget(groupPres);
         verticalLayoutWidget_12->setObjectName(QStringLiteral("verticalLayoutWidget_12"));
-        verticalLayoutWidget_12->setGeometry(QRect(10, 20, 211, 254));
+        verticalLayoutWidget_12->setGeometry(QRect(10, 20, 211, 221));
         verticalLayout_12 = new QVBoxLayout(verticalLayoutWidget_12);
         verticalLayout_12->setSpacing(6);
         verticalLayout_12->setContentsMargins(11, 11, 11, 11);
@@ -227,97 +260,12 @@ public:
 
         verticalLayout_12->addWidget(but8_3);
 
-        btnGroup = new QGroupBox(centralWidget);
-        btnGroup->setObjectName(QStringLiteral("btnGroup"));
-        btnGroup->setGeometry(QRect(480, 500, 91, 51));
-        verticalLayoutWidget_13 = new QWidget(btnGroup);
-        verticalLayoutWidget_13->setObjectName(QStringLiteral("verticalLayoutWidget_13"));
-        verticalLayoutWidget_13->setGeometry(QRect(10, 20, 211, 141));
-        verticalLayout_13 = new QVBoxLayout(verticalLayoutWidget_13);
-        verticalLayout_13->setSpacing(6);
-        verticalLayout_13->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
-        verticalLayout_13->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        verticalLayout_13->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_19 = new QHBoxLayout();
-        horizontalLayout_19->setSpacing(6);
-        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
-        horizontalLayout_19->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        addFieldBut_3 = new QPushButton(verticalLayoutWidget_13);
-        addFieldBut_3->setObjectName(QStringLiteral("addFieldBut_3"));
-
-        horizontalLayout_19->addWidget(addFieldBut_3);
-
-        changeFieldBut_3 = new QPushButton(verticalLayoutWidget_13);
-        changeFieldBut_3->setObjectName(QStringLiteral("changeFieldBut_3"));
-
-        horizontalLayout_19->addWidget(changeFieldBut_3);
-
-        horizontalSpacer_19 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_19->addItem(horizontalSpacer_19);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_19);
-
-        label_27 = new QLabel(verticalLayoutWidget_13);
-        label_27->setObjectName(QStringLiteral("label_27"));
-
-        verticalLayout_13->addWidget(label_27);
-
-        horizontalLayout_20 = new QHBoxLayout();
-        horizontalLayout_20->setSpacing(6);
-        horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
-        horizontalLayout_20->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        addCarBut_3 = new QPushButton(verticalLayoutWidget_13);
-        addCarBut_3->setObjectName(QStringLiteral("addCarBut_3"));
-
-        horizontalLayout_20->addWidget(addCarBut_3);
-
-        changeCarBut_3 = new QPushButton(verticalLayoutWidget_13);
-        changeCarBut_3->setObjectName(QStringLiteral("changeCarBut_3"));
-
-        horizontalLayout_20->addWidget(changeCarBut_3);
-
-        horizontalSpacer_20 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_20->addItem(horizontalSpacer_20);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_20);
-
-        label_28 = new QLabel(verticalLayoutWidget_13);
-        label_28->setObjectName(QStringLiteral("label_28"));
-
-        verticalLayout_13->addWidget(label_28);
-
-        horizontalLayout_21 = new QHBoxLayout();
-        horizontalLayout_21->setSpacing(6);
-        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
-        horizontalLayout_21->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        addPresBut_3 = new QPushButton(verticalLayoutWidget_13);
-        addPresBut_3->setObjectName(QStringLiteral("addPresBut_3"));
-
-        horizontalLayout_21->addWidget(addPresBut_3);
-
-        changePressBut_3 = new QPushButton(verticalLayoutWidget_13);
-        changePressBut_3->setObjectName(QStringLiteral("changePressBut_3"));
-
-        horizontalLayout_21->addWidget(changePressBut_3);
-
-        horizontalSpacer_21 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_21->addItem(horizontalSpacer_21);
-
-
-        verticalLayout_13->addLayout(horizontalLayout_21);
-
         changeField = new QGroupBox(centralWidget);
         changeField->setObjectName(QStringLiteral("changeField"));
-        changeField->setGeometry(QRect(610, 490, 101, 71));
+        changeField->setGeometry(QRect(290, 240, 231, 281));
         verticalLayoutWidget_14 = new QWidget(changeField);
         verticalLayoutWidget_14->setObjectName(QStringLiteral("verticalLayoutWidget_14"));
-        verticalLayoutWidget_14->setGeometry(QRect(10, 30, 261, 157));
+        verticalLayoutWidget_14->setGeometry(QRect(10, 30, 261, 101));
         verticalLayout_14 = new QVBoxLayout(verticalLayoutWidget_14);
         verticalLayout_14->setSpacing(6);
         verticalLayout_14->setContentsMargins(11, 11, 11, 11);
@@ -346,7 +294,7 @@ public:
 
         groupCar = new QGroupBox(centralWidget);
         groupCar->setObjectName(QStringLiteral("groupCar"));
-        groupCar->setGeometry(QRect(30, 90, 291, 341));
+        groupCar->setGeometry(QRect(30, 90, 61, 51));
         verticalLayoutWidget_15 = new QWidget(groupCar);
         verticalLayoutWidget_15->setObjectName(QStringLiteral("verticalLayoutWidget_15"));
         verticalLayoutWidget_15->setGeometry(QRect(10, 20, 271, 301));
@@ -464,6 +412,91 @@ public:
         reduceBut = new QPushButton(centralWidget);
         reduceBut->setObjectName(QStringLiteral("reduceBut"));
         reduceBut->setGeometry(QRect(0, 0, 31, 16));
+        btnGroup = new QGroupBox(centralWidget);
+        btnGroup->setObjectName(QStringLiteral("btnGroup"));
+        btnGroup->setGeometry(QRect(20, 310, 141, 121));
+        verticalLayoutWidget_13 = new QWidget(btnGroup);
+        verticalLayoutWidget_13->setObjectName(QStringLiteral("verticalLayoutWidget_13"));
+        verticalLayoutWidget_13->setGeometry(QRect(10, 20, 211, 127));
+        verticalLayout_13 = new QVBoxLayout(verticalLayoutWidget_13);
+        verticalLayout_13->setSpacing(6);
+        verticalLayout_13->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
+        verticalLayout_13->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        verticalLayout_13->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setSpacing(6);
+        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
+        horizontalLayout_19->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        addFieldBut_3 = new QPushButton(verticalLayoutWidget_13);
+        addFieldBut_3->setObjectName(QStringLiteral("addFieldBut_3"));
+
+        horizontalLayout_19->addWidget(addFieldBut_3);
+
+        changeFieldBut_3 = new QPushButton(verticalLayoutWidget_13);
+        changeFieldBut_3->setObjectName(QStringLiteral("changeFieldBut_3"));
+
+        horizontalLayout_19->addWidget(changeFieldBut_3);
+
+        horizontalSpacer_19 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_19->addItem(horizontalSpacer_19);
+
+
+        verticalLayout_13->addLayout(horizontalLayout_19);
+
+        label_27 = new QLabel(verticalLayoutWidget_13);
+        label_27->setObjectName(QStringLiteral("label_27"));
+
+        verticalLayout_13->addWidget(label_27);
+
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setSpacing(6);
+        horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
+        horizontalLayout_20->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        addCarBut_3 = new QPushButton(verticalLayoutWidget_13);
+        addCarBut_3->setObjectName(QStringLiteral("addCarBut_3"));
+
+        horizontalLayout_20->addWidget(addCarBut_3);
+
+        changeCarBut_3 = new QPushButton(verticalLayoutWidget_13);
+        changeCarBut_3->setObjectName(QStringLiteral("changeCarBut_3"));
+
+        horizontalLayout_20->addWidget(changeCarBut_3);
+
+        horizontalSpacer_20 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_20->addItem(horizontalSpacer_20);
+
+
+        verticalLayout_13->addLayout(horizontalLayout_20);
+
+        label_28 = new QLabel(verticalLayoutWidget_13);
+        label_28->setObjectName(QStringLiteral("label_28"));
+
+        verticalLayout_13->addWidget(label_28);
+
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setSpacing(6);
+        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
+        horizontalLayout_21->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        addPresBut_3 = new QPushButton(verticalLayoutWidget_13);
+        addPresBut_3->setObjectName(QStringLiteral("addPresBut_3"));
+
+        horizontalLayout_21->addWidget(addPresBut_3);
+
+        changePressBut_3 = new QPushButton(verticalLayoutWidget_13);
+        changePressBut_3->setObjectName(QStringLiteral("changePressBut_3"));
+
+        horizontalLayout_21->addWidget(changePressBut_3);
+
+        horizontalSpacer_21 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_21->addItem(horizontalSpacer_21);
+
+
+        verticalLayout_13->addLayout(horizontalLayout_21);
+
         Lab1_3Class->setCentralWidget(centralWidget);
 
         retranslateUi(Lab1_3Class);
@@ -475,8 +508,9 @@ public:
     {
         Lab1_3Class->setWindowTitle(QApplication::translate("Lab1_3Class", "Lab1_3", Q_NULLPTR));
         groupField->setTitle(QApplication::translate("Lab1_3Class", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\277\320\276\320\273\320\265", Q_NULLPTR));
-        label_23->setText(QApplication::translate("Lab1_3Class", "\321\201\321\207\320\270\321\202\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", Q_NULLPTR));
-        lineEdit_3->setText(QApplication::translate("Lab1_3Class", "output.txt", Q_NULLPTR));
+        radioRazm->setText(QApplication::translate("Lab1_3Class", "\320\267\320\260\320\264\320\260\321\202\321\214 \321\200\320\260\320\267\320\274\320\265\321\200", Q_NULLPTR));
+        radioFile->setText(QApplication::translate("Lab1_3Class", "\321\201\321\207\320\270\321\202\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", Q_NULLPTR));
+        lineEdit_3->setText(QString());
         but_3->setText(QApplication::translate("Lab1_3Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214", Q_NULLPTR));
         groupPres->setTitle(QApplication::translate("Lab1_3Class", "\320\241\321\202\320\265\320\275\320\264", Q_NULLPTR));
         label_24->setText(QApplication::translate("Lab1_3Class", "name", Q_NULLPTR));
@@ -489,15 +523,6 @@ public:
         but4_3->setText(QApplication::translate("Lab1_3Class", "\320\276\321\202\320\274\320\265\320\275\320\260", Q_NULLPTR));
         but3_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
         but8_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214", Q_NULLPTR));
-        btnGroup->setTitle(QApplication::translate("Lab1_3Class", "\320\234\320\265\320\275\321\216", Q_NULLPTR));
-        addFieldBut_3->setText(QApplication::translate("Lab1_3Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214", Q_NULLPTR));
-        changeFieldBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
-        label_27->setText(QApplication::translate("Lab1_3Class", "\320\234\320\260\321\210\320\270\320\275\320\260", Q_NULLPTR));
-        addCarBut_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
-        changeCarBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
-        label_28->setText(QApplication::translate("Lab1_3Class", "\320\241\321\202\320\265\320\275\320\264", Q_NULLPTR));
-        addPresBut_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
-        changePressBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
         changeField->setTitle(QApplication::translate("Lab1_3Class", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\277\320\276\320\273\320\265", Q_NULLPTR));
         delAll_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265", Q_NULLPTR));
         label_29->setText(QApplication::translate("Lab1_3Class", "\320\277\320\265\321\207\320\260\321\202\321\214 \320\262 \321\204\320\260\320\271\320\273", Q_NULLPTR));
@@ -517,6 +542,15 @@ public:
         but2_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
         but7_3->setText(QApplication::translate("Lab1_3Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214", Q_NULLPTR));
         reduceBut->setText(QApplication::translate("Lab1_3Class", "...", Q_NULLPTR));
+        btnGroup->setTitle(QApplication::translate("Lab1_3Class", "\320\234\320\265\320\275\321\216", Q_NULLPTR));
+        addFieldBut_3->setText(QApplication::translate("Lab1_3Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214", Q_NULLPTR));
+        changeFieldBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_27->setText(QApplication::translate("Lab1_3Class", "\320\234\320\260\321\210\320\270\320\275\320\260", Q_NULLPTR));
+        addCarBut_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
+        changeCarBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_28->setText(QApplication::translate("Lab1_3Class", "\320\241\321\202\320\265\320\275\320\264", Q_NULLPTR));
+        addPresBut_3->setText(QApplication::translate("Lab1_3Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
+        changePressBut_3->setText(QApplication::translate("Lab1_3Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
     } // retranslateUi
 
 };

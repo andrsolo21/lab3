@@ -97,6 +97,13 @@ void MotorShow::exportToFile(QString name) {
 	fout.close();
 }
 
+void MotorShow::setGabarits(float gabs[]) {
+	if (gabs[0] > 0 && gabs[1] > 0) {
+		_gabarits[0] = gabs[0];
+		_gabarits[1] = gabs[1];
+	}
+}
+
 NoCar ** MotorShow::operator [](int c) const
 {
 	if (c < (_tail - _head) && c >= 0) {
@@ -111,6 +118,8 @@ float MotorShow::getGabarits(int i) const {
 }
 
 int MotorShow::getCount() const {
+	if (_tail == NULL)
+		return 0;
 	return (_tail - _head);
 }
 
@@ -121,14 +130,6 @@ void MotorShow::addEl(NoCar * element) {
 		_tail = _tail + 1;
 	}
 }
-
-/*void MotorShow::addEl(Car * element) {
-	if (checkEl(*element)) {
-		grow10();
-		*(_tail) = element;
-		_tail = _tail + 1;
-	}
-}*/
 
 void MotorShow::deleteElement(int c) {
 	if (c < (_tail - _head) && c >= 0) {
@@ -283,17 +284,19 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 		return false;
 
 	for (auto ** i = _head; i < _tail; i++) {
-		d = sqrt(((*i)->getCoord(0) - pToCheck.getCoord(0)) * ((*i)->getCoord(0) - pToCheck.getCoord(0)) +
-			((*i)->getCoord(1) - pToCheck.getCoord(1)) * ((*i)->getCoord(1) - pToCheck.getCoord(1)));
+		d = (pow((*i)->getCoord(0) - pToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - pToCheck.getCoord(1),2));
 		if ((*i)->getType()) {
-			if ((*i)->getRBig() + pToCheck.getR() > d) {
-				count = 0;
+			if (pow((*i)->getRBig() + pToCheck.getR(),2) > d) {
+				d = 0;
 				for (auto j = 0; j < 4; j++)
 					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2)
 						- pow((*i)->getR(), 2) < 0)
-						count++;
-				if (count < 4)
+						d++;
+				if (d < 4)
 					return false;
+				else
+					if ((*i)->getName() != pToCheck.getName())
+						return false;
 			}
 		}
 		else {

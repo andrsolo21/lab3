@@ -18,6 +18,7 @@ public:
 
 public slots:
 	void slotBut();
+	void getGabs();
 	void doVisible1();
 	void doVisible2();
 	void doVisible3();
@@ -41,10 +42,9 @@ public slots:
 		_motors->exportToFile(ui.strToFile_3->text());
 		ui.strToFile_3->clear();
 	}
-	void deleteAll() {
-		_motors->deleteAll();
-		update();
-	}
+	void deleteAll();
+	void radioGabsC();
+	void radioFileC();
 
 private:
 	Ui::Lab1_3Class ui;
@@ -59,5 +59,5 @@ private:
 	void coonections();
 	NoCar * getPres();
 	Car * getCar();
-	
+	void setEnabledMenu(bool value);
 };
