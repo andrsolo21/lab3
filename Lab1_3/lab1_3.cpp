@@ -7,6 +7,7 @@ bool fileIsExist(const std::string & filePath);
 Lab1_3::Lab1_3(QWidget *parent)
 	: QMainWindow(parent)
 {
+	_index = -1;
 	ui.setupUi(this);
 	ui.groupCar->setVisible(false);
 	ui.groupPres->setVisible(false);
@@ -112,16 +113,23 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 		//circle
 		painter.setBrush(QBrush(Qt::blue));
 		for (auto i = 0; i < _motors->getCount(); i++) {
+			if (_index == i)
+				painter.setBrush(QBrush(Qt::red));
 			if (!((*(*_motors)[i])->getType())) {
 				tempNoCar = **(*_motors)[i];
 				center2 = QPointF(tempNoCar.getCoord(0) * _otn + center.x() - gabs[0] / 2,
 					tempNoCar.getCoord(1)* _otn + center.y() - gabs[1] / 2);
 				painter.drawEllipse(center2, tempNoCar.getR() * _otn, tempNoCar.getR() * _otn);
 			}
+			if (_index == i)
+				painter.setBrush(QBrush(Qt::blue));
 		}
 		//rect
 		painter.setBrush(QBrush(Qt::yellow));
 		for (auto i = 0; i < _motors->getCount(); i++) {
+
+			if (_index == i)
+					painter.setBrush(QBrush(Qt::red));
 			if ((*(*_motors)[i])->getType()) {
 				tempCar = new Car;
 				*tempCar = **(*_motors)[i];
@@ -134,13 +142,15 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 				painter.drawPolygon(polygon);
 				delete tempCar;
 			}
+			if (_index == i)
+				painter.setBrush(QBrush(Qt::yellow));
 		}
 	}
 }
 
 void Lab1_3::coonections() {
 	connect(ui.but_3, SIGNAL(clicked()), this, SLOT(slotBut()));
-	//connect(ui.printBtn, SIGNAL(clicked()), this, SLOT(printToFile()));
+	connect(ui.printBtn_3, SIGNAL(clicked()), this, SLOT(printToFile()));
 	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
 
 	connect(ui.addFieldBut_3, SIGNAL(clicked()), this,  SLOT(doVisible1()));
@@ -159,7 +169,7 @@ void Lab1_3::coonections() {
 	connect(ui.comboPress_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
 	connect(ui.comboBoxCar_3, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));
 
-	//connect(ui.delAll_3, SIGNAL(clicked()), this, SLOT(deleteAll()));
+	connect(ui.delAll_3, SIGNAL(clicked()), this, SLOT(deleteAll()));
 
 
 	//connect(ui.comboBox, SIGNAL(activated(int)), this, SLOT(comboSelectItem(int)));
@@ -342,18 +352,15 @@ NoCar * Lab1_3::getPres() {
 }
 
 void Lab1_3::deletePres() {
-	int i, index = ui.comboBoxCar_3->currentData().toInt();
-	for (i = 0; i < _motors->getCount() && index >= 0; i++)
-		if (!((*((*_motors)[i]))->getType()))
-			index--;
-	_motors->deleteElement(i - 1);
+	int index = ui.comboPress_3->currentData().toInt();
+	_motors->deleteElement(index);
 	update();
 	comboPres();
 	iDo6();
 }
 
 void Lab1_3::setPres() {
-	NoCar * noCar = getCar();
+	NoCar * noCar = getPres();
 	if (noCar)
 	{
 		_motors->addEl(noCar);
@@ -364,19 +371,16 @@ void Lab1_3::setPres() {
 void Lab1_3::changePres() {
 	NoCar * noCar = getPres();
 	if (noCar) {
-		int i, index = ui.comboBoxCar_3->currentData().toInt();
-		for (i = 0; i < _motors->getCount() && index >= 0; i++)
-			if (!((*((*_motors)[i]))->getType()))
-				index--;
-		int index = ui.comboBoxCar_3->currentData().toInt();
-		_motors->changeEl(noCar, i-1);
+		int  index = ui.comboPress_3->currentData().toInt();
+		_motors->changeEl(noCar, index);
 	}
 	update();
 }
 
 
 void Lab1_3::doVisible1() {
-
+	_index = -1;
+	update();
 	if (ui.groupField->isVisible())
 		ui.groupField->setVisible(false);
 	else  {
@@ -388,7 +392,8 @@ void Lab1_3::doVisible1() {
 }
 
 void Lab1_3::doVisible2() {
-
+	_index = -1;
+	update();
 	if (ui.groupCar->isVisible() && !(ui.but7_3->isVisible()))
 		ui.groupCar->setVisible(false);
 	else {
@@ -401,7 +406,8 @@ void Lab1_3::doVisible2() {
 }
 
 void Lab1_3::doVisible3() {
-
+	_index = -1;
+	update();
 	if (ui.groupPres->isVisible() && !(ui.comboPress_3->isVisible()))
 		ui.groupPres->setVisible(false);
 	else {
@@ -414,7 +420,8 @@ void Lab1_3::doVisible3() {
 }
 
 void Lab1_3::doVisible4() {
-
+	_index = -1;
+	update();
 	if (ui.changeField->isVisible())
 		ui.changeField->setVisible(false);
 	else {
@@ -426,7 +433,8 @@ void Lab1_3::doVisible4() {
 }
 
 void Lab1_3::doVisible5() {
-
+	_index = -1;
+	update();
 	if (ui.groupCar->isVisible() && ui.but7_3->isVisible())
 		ui.groupCar->setVisible(false);
 	else {
@@ -438,14 +446,15 @@ void Lab1_3::doVisible5() {
 		ui.comboBoxCar_3->setVisible(true);
 		comboCar();
 		iDo5();
-		ui.but5_3->setText(QString::fromLocal8Bit("change"));
-		//disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
-		//connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
+		ui.but2_3->setText(QString::fromLocal8Bit("change"));
+		disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
+		connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
 	}
 }
 
 void Lab1_3::doVisible6() {
-
+	_index = -1;
+	update();
 	if (ui.groupPres->isVisible() && ui.comboPress_3->isVisible())
 		ui.groupPres->setVisible(false);
 	else {
@@ -455,11 +464,11 @@ void Lab1_3::doVisible6() {
 		ui.changeField->setVisible(false);
 		ui.comboPress_3->setVisible(true);
 		ui.but8_3->setVisible(true);
-		//iDo6();
+		iDo6();
 		ui.but3_3->setText(QString::fromLocal8Bit("change"));
 		comboPres();
-		//disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
-		//connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+		disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
+		connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
 }
 
@@ -484,8 +493,8 @@ void Lab1_3::iDo2() {
 	ui.coordYLine_3->clear();
 	ui.gabYLine_3->clear();
 	ui.but2_3->setText(QString::fromLocal8Bit("add"));
-	//disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
-	//connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
+	disconnect(ui.but2_3, SIGNAL(clicked()), this, SLOT(changeCar()));
+	connect(ui.but2_3, SIGNAL(clicked()), this, SLOT(setCar()));
 }
 
 void Lab1_3::iDo3() {
@@ -504,8 +513,8 @@ void Lab1_3::iDo3() {
 	ui.coordPresX_3->clear();
 	ui.coordPresY_3->clear();
 	ui.but3_3->setText(QString::fromLocal8Bit("add"));
-	//disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
-	//connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
+	disconnect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
+	connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(setPres()));
 }
 
 void Lab1_3::iDo5(int k) {	
@@ -513,6 +522,10 @@ void Lab1_3::iDo5(int k) {
 	if (ui.comboBoxCar_3->isEnabled()) {
 		NoCar * car;
 		int index = ui.comboBoxCar_3->currentData().toInt();
+		if (ui.groupCar->isVisible()) {
+			_index = index;
+			update();
+		}
 		car = *((*_motors)[index]);
 		ui.nameAddLine_3->setEnabled(true);
 		ui.angleLine_3->setEnabled(true);
@@ -559,11 +572,12 @@ void Lab1_3::iDo6(int k) {
 		ui.but4_3->setEnabled(true);
 		ui.but8_3->setEnabled(true);
 		
-		int i, index = ui.comboBoxCar_3->currentData().toInt();
-		for (i = 0; i < _motors->getCount() && index >= 0; i++)
-			if (!((*((*_motors)[i]))->getType()))
-				index--;
-		NoCar * car = *((*_motors)[i-1]);
+		int index = ui.comboPress_3->currentData().toInt();
+		if (ui.groupPres->isVisible()) {
+			_index = index;
+			update();
+		}
+		NoCar * car = *((*_motors)[index]);
 		ui.namePresLine_3->setText(car->getName());
 		ui.radiusPresLine_3->setText(QString::number((car->getR())));
 		ui.coordPresX_3->setText(QString::number(car->getCoord(0)));
@@ -613,7 +627,7 @@ QPolygonF Lab1_3::rectMy(qreal a, qreal b, const  QPointF& center, float alpha) 
 	else {
 		betta = M_PI / 2 - atan(a / b);
 	}
-	float mass[4] = { betta, M_PI - betta, M_PI + betta, -betta };
+	double mass[4] = { betta, M_PI - betta, M_PI + betta, -betta };
 
 	for (int i = 0; i < 4; i++) {
 		qreal fAngle = mass[i] - (alpha / 360) * 2 * M_PI;

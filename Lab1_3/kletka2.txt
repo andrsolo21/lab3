@@ -1,0 +1,122 @@
+40
+20 20
+car
+Cont1
+1 1 45 7 4
+car
+Cont3
+1 1 0 12 18
+car
+Cont1
+1 1 50 9 6
+car
+Cont1
+1 1 0 10 7
+car
+Cont1
+1 1 45 1 1
+car
+MyBestCar2
+1 1 0 3 16
+car
+Cont2
+1 1 45 15 15
+pres
+Cont2
+3 12 12
+car
+Cont2
+1 1 45 12 12
+car
+newcar1
+2 4 0 3 7
+pres
+cert
+4 15 5
+car
+cert
+1 1 0 14 4
+car
+cert
+1 1 0 16 6
+car
+cert
+1 1 0 16 4
+car
+cert
+1 1 0 14 6
+car
+cert
+1 1 0 15 5
+car
+cert
+1 1 0 15 7
+car
+cert
+1 1 0 15 3
+car
+cert
+1 1 0 13 5
+car
+cert
+1 1 0 17 5
+car
+cert
+1 1 0 13 3
+car
+cert
+1 1 0 17 3
+car
+cert
+1 1 0 17 7
+car
+cert
+1 1 0 13 7
+car
+cert
+1 1 0 14 2
+car
+cert
+1 1 0 16 2
+car
+cert
+1 1 0 18 4
+car
+cert
+1 1 0 18 6
+car
+cert
+1 1 0 12 6
+car
+cert
+1 1 0 12 4
+car
+cert
+1 1 0 14 8
+car
+cert
+1 1 0 16 8
+car
+Cont2
+1 1 45 12 10.5
+car
+Cont2
+1 1 45 12 13.5
+car
+Cont2
+1 1 45 13.5 12
+car
+Cont2
+1 1 45 13.5 13.5
+car
+Cont2
+1 1 45 10.5 13.5
+car
+Cont2
+1 1 45 10.5 10.5
+car
+Cont2
+1 1 45 10.5 12
+car
+Cont2
+1 1 45 13.5 10.5

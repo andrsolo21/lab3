@@ -49,7 +49,7 @@
       <item>
        <widget class="QLineEdit" name="lineEdit_3">
         <property name="text">
-         <string>output.txt</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -587,8 +587,6 @@
       </item>
      </layout>
     </widget>
-    <zorder>verticalLayoutWidget_15</zorder>
-    <zorder>changeField</zorder>
    </widget>
    <widget class="QPushButton" name="reduceBut">
     <property name="geometry">

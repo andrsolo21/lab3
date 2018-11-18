@@ -1,0 +1,32 @@
+10
+20 20
+car
+Cont1
+1 1 45 7 4
+car
+Cont3
+1 1 0 12 18
+car
+Cont1
+1 1 50 9 6
+car
+Cont1
+1 1 0 10 7
+car
+Cont1
+1 1 45 1 1
+car
+MyBestCar2
+1 1 0 3 16
+car
+Cont2
+1 1 45 15 15
+pres
+Cont2
+3 12 12
+car
+Cont2
+1 1 45 12 12
+car
+newcar1
+2 4 0 3 7

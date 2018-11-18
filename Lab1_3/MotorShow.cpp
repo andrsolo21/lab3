@@ -150,19 +150,21 @@ void MotorShow::deleteAll() {
 
 void MotorShow::changeEl(NoCar * noCar, int c) {
 	if (c >= 0 && c < getCount()) {
-		NoCar  oldEl = **(_head + c);
+		NoCar * oldEl = new NoCar ( **(_head + c));
 		deleteElement(c);
 		if (checkEl(*noCar)) {
 			_tail++;
 			for (auto i = _tail; i > (_head + c); i--)
 				*i = *(i - 1);
 			*(_head + c) = noCar;
+			delete oldEl;
 		}
 		else {
 			_tail++;
 			for (auto i = _tail; i > (_head + c); i--)
 				*i = *(i - 1);
-			*(_head + c) = &oldEl;
+			*(_head + c) = oldEl;
+			delete noCar;
 		}
 	}
 }

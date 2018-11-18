@@ -6,7 +6,7 @@
 #include <QLineEdit>
 #include <math.h>
 #include "MotorShow.h"
-# define M_PI           3.14159265358979323846
+
 
 
 class Lab1_3 : public QMainWindow
@@ -37,10 +37,18 @@ public slots:
 	void deletePres();
 	void changeCar();
 	void changePres();
+	void printToFile() {
+		_motors->exportToFile(ui.strToFile_3->text());
+		ui.strToFile_3->clear();
+	}
+	void deleteAll() {
+		_motors->deleteAll();
+		update();
+	}
 
 private:
 	Ui::Lab1_3Class ui;
-	int _gabarits[2] = { 0 ,0 };
+	int _gabarits[2] = { 0 ,0 }, _index;
 	float _otn = 1;
 	MotorShow *_motors = NULL;
 	bool _btns = true;
