@@ -35,7 +35,7 @@ Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 	}
 	_coord[0] = coordAdd[0];
 	_coord[1] = coordAdd[1];
-	calculate();
+	//calculate();
 }
 Car::Car(const Car &car) {
 	_name = car.getName();
@@ -44,7 +44,7 @@ Car::Car(const Car &car) {
 	_size[1] = car.getSize(1);
 	_coord[0] = car.getCoord(0);
 	_coord[1] = car.getCoord(1);
-	calculate();
+	//calculate();
 
 }
 Car& Car::operator = (NoCar car) {
@@ -54,7 +54,7 @@ Car& Car::operator = (NoCar car) {
 	_size[1] = car.getSize(1);
 	_coord[0] = car.getCoord(0);
 	_coord[1] = car.getCoord(1);
-	calculate();
+	//calculate();
 	return *this;
 }
 void Car::copyCar(const Car &car) {
@@ -64,7 +64,7 @@ void Car::copyCar(const Car &car) {
 	_size[1] = car.getSize(1);
 	_coord[0] = car.getCoord(0);
 	_coord[1] = car.getCoord(1);
-	calculate();
+	//calculate();
 }
 void Car::setAngle(float angleAdd) {
 	int toAngle = int(angleAdd);
@@ -83,29 +83,24 @@ float Car::getSize(int i) const {
 	return _size[i % 2];
 }
 float Car::getA(int i) const {
-	return _A[i % 2];
+	return getRBig() * sin(-1 * atan(_size[1] / _size[0])) + _coord[i%2];
 }
 float Car::getB(int i) const {
-	return _B[i % 2];
+	return  getRBig() * sin(atan(_size[1] / _size[0]) - 90) + _coord[i%2];
 }
 float Car::getC(int i) const {
-	return _C[i % 2];
+	return getRBig() * sin(atan(_size[1] / _size[0])) + _coord[i%2];
 }
 float Car::getD(int i) const {
-	return _D[i % 2];
+	return getRBig() * sin(90 + atan(_size[1] / _size[0])) + _coord[i%2];
 }
 float Car::getRBig() const {
-	return _R;
+	return sqrt(((_size[0]) / 2) * ((_size[0]) / 2) + ((_size[1]) / 2) * ((_size[1]) / 2));
 }
-void Car::calculate() {
-	float fi = atan(_size[1] / _size[0]);
-	_R = sqrt(((_size[0]) / 2) * ((_size[0]) / 2) + ((_size[1]) / 2) * ((_size[1]) / 2));
-	if (_size[0] / 2 > _size[1] / 2)
-		_r = _size[1] / 2;
-	else
-		_r = _size[0] / 2;
 
-	_C[0] = _R * sin(fi) + _coord[0];
+/*void Car::calculate() {
+
+	_C[0] = 
 	_D[0] = _R * sin(90 + fi) + _coord[0];
 	_A[0] = _R * sin(-1 * fi) + _coord[0];
 	_B[0] = _R * sin(fi - 90) + _coord[0];
@@ -114,7 +109,14 @@ void Car::calculate() {
 	_D[1] = _R * cos(90 + fi) + _coord[1];
 	_A[1] = _R * cos(-1 * fi) + _coord[1];
 	_B[1] = _R * cos(fi - 90) + _coord[1];
+}*/
+float Car::getR() const {
+	if (_size[0] / 2 > _size[1] / 2)
+		return _size[1] / 2;
+	else
+		return _size[0] / 2;
 }
+
 Car::~Car()
 {
 

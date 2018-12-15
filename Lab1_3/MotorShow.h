@@ -1,6 +1,7 @@
 #pragma once
 #include "Car.h"
 #include "noCar.h"
+#include "Circle.h"
 #include <fstream> 
 #include <string>
 #include <QString>
@@ -23,7 +24,7 @@ public:
 	void changeEl(NoCar * noCar,int c);
 	NoCar ** operator[](int c) const;
 	float getGabarits(int i) const;
-	void exportToFile(QString name);
+	void exportToFile(QString name) const;
 	void setGabarits(float babs[]);
 protected:
 	NoCar **_head, **_tail;

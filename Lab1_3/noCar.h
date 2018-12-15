@@ -5,14 +5,13 @@ class NoCar
 {
 public:
 	NoCar();
-	NoCar(const NoCar &addNo);
-	NoCar(QString nameAdd, float rAdd, float coordAdd[]);
-	~NoCar();
-	QString getName() const;
-	float getCoord(int i) const;
-	void setName(QString nameAdd);	
+	virtual ~NoCar();
+	QString getName() const ;
+	float getCoord(int i) const ;
+	void setName(QString nameAdd);
 	void setCoord(float coordAdd[]);
-	float getR() const;
+
+	virtual float getR() const { return -1; };
 	virtual bool getType() const { return false; }
 
 	//UnitCar getKind() { return _kind; };
@@ -27,8 +26,8 @@ public:
 
 protected:
 	QString _name;
-	float _coord[2], _r;
+	float _coord[2];
 
 };
-Q_DECLARE_METATYPE(NoCar)
+
 

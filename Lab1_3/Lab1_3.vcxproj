@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="car.cpp" />
+    <ClCompile Include="circle.cpp" />
     <ClCompile Include="lab1_3.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MotorShow.cpp" />
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="car.h" />
+    <ClInclude Include="circle.h" />
     <ClInclude Include="MotorShow.h" />
     <ClInclude Include="noCar.h" />
     <QtMoc Include="lab1_3.h" />

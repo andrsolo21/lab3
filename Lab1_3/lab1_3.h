@@ -57,7 +57,7 @@ private:
 	void paintEvent(QPaintEvent *event);
 	void setSize(int ots);
 	void coonections();
-	NoCar * getPres();
+	Circle * getPres();
 	Car * getCar();
 	void setEnabledMenu(bool value);
 };

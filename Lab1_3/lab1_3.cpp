@@ -96,7 +96,7 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 	
 	//main drawing
 	Car * tempCar;
-	NoCar  tempNoCar;
+	Circle * tempNoCar;
 	if (_motors != NULL) {
 		painter.setPen(QPen(Qt::black));
 		//circle
@@ -105,10 +105,11 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 			if (_index == i)
 				painter.setBrush(QBrush(Qt::red));
 			if (!((*(*_motors)[i])->getType())) {
-				tempNoCar = **(*_motors)[i];
-				center2 = QPointF(tempNoCar.getCoord(0) * _otn + center.x() - gabs[0] / 2,
-					tempNoCar.getCoord(1)* _otn + center.y() - gabs[1] / 2);
-				painter.drawEllipse(center2, tempNoCar.getR() * _otn, tempNoCar.getR() * _otn);
+				tempNoCar = new Circle;
+				*tempNoCar = **(*_motors)[i];
+				center2 = QPointF(tempNoCar->getCoord(0) * _otn + center.x() - gabs[0] / 2,
+					tempNoCar->getCoord(1)* _otn + center.y() - gabs[1] / 2);
+				painter.drawEllipse(center2, tempNoCar->getR() * _otn, tempNoCar->getR() * _otn);
 			}
 			if (_index == i)
 				painter.setBrush(QBrush(Qt::blue));
@@ -376,7 +377,7 @@ void Lab1_3::changeCar() {
 }
 
 
-NoCar * Lab1_3::getPres() {
+Circle * Lab1_3::getPres() {
 	float coord[2], radius;
 	bool ok1, ok2, ok3;
 	//int index = ui.comboBox->currentData().toInt();
@@ -384,9 +385,9 @@ NoCar * Lab1_3::getPres() {
 	coord[1] = (ui.coordPresY_3->text()).toFloat(&ok2);
 	QString name = ui.namePresLine_3->text();
 	radius = (ui.radiusPresLine_3->text()).toFloat(&ok3);
-	NoCar * noCar = NULL;
+	Circle * noCar = NULL;
 	if ((!name.isEmpty()) && ok1 && ok2 && ok3) {
-		noCar = new NoCar(name,radius, coord);
+		noCar = new Circle(name,radius, coord);
 	}
 	return noCar;
 }
@@ -400,7 +401,7 @@ void Lab1_3::deletePres() {
 }
 
 void Lab1_3::setPres() {
-	NoCar * noCar = getPres();
+	Circle * noCar = getPres();
 	if (noCar)
 	{
 		_motors->addEl(noCar);
@@ -409,14 +410,13 @@ void Lab1_3::setPres() {
 }
 
 void Lab1_3::changePres() {
-	NoCar * noCar = getPres();
+	Circle * noCar = getPres();
 	if (noCar) {
 		int  index = ui.comboPress_3->currentData().toInt();
 		_motors->changeEl(noCar, index);
 	}
 	update();
 }
-
 
 void Lab1_3::doVisible1() {
 	_index = -1;
@@ -512,7 +512,6 @@ void Lab1_3::doVisible6() {
 		connect(ui.but3_3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
 }
-
 
 void Lab1_3::iDo2() {
 	ui.but7_3->setVisible(false);
@@ -638,7 +637,6 @@ void Lab1_3::iDo6(int k) {
 		ui.but8_3->setEnabled(false);
 	}
 }
-
 
 void Lab1_3::reduce() {
 	if (_btns)

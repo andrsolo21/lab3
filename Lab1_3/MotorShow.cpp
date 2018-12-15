@@ -68,7 +68,7 @@ MotorShow::MotorShow(std::string name) {
 			}
 			if (type == "pres") {
 				file >> s >> angle >> coord[0] >> coord[1];
-				addEl(new NoCar(QString::fromStdString(s), angle, coord));
+				addEl(new Circle(QString::fromStdString(s), angle, coord));
 			}		
 		}
 		file.close();
@@ -76,7 +76,7 @@ MotorShow::MotorShow(std::string name) {
 
 }
 
-void MotorShow::exportToFile(QString name) {
+void MotorShow::exportToFile(QString name) const {
 	ofstream fout(name.toStdString(), ios_base::out | ios_base::trunc);
 	fout << (_tail - _head) << endl;
 	fout << _gabarits[0] << ' ';
@@ -292,11 +292,11 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2)
 						- pow((*i)->getR(), 2) < 0)
 						d++;
-				if (d < 4)
+				/*if (d < 4)
 					return false;
 				else
 					if ((*i)->getName() != pToCheck.getName())
-						return false;
+						return false;*/
 			}
 		}
 		else {

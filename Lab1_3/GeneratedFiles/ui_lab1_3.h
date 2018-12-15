@@ -114,7 +114,8 @@ public:
     {
         if (Lab1_3Class->objectName().isEmpty())
             Lab1_3Class->setObjectName(QStringLiteral("Lab1_3Class"));
-        Lab1_3Class->resize(858, 594);
+        Lab1_3Class->resize(900, 600);
+        Lab1_3Class->setMinimumSize(QSize(650, 488));
         centralWidget = new QWidget(Lab1_3Class);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupField = new QGroupBox(centralWidget);
@@ -407,8 +408,6 @@ public:
 
         verticalLayout_15->addWidget(but7_3);
 
-        verticalLayoutWidget_15->raise();
-        changeField->raise();
         reduceBut = new QPushButton(centralWidget);
         reduceBut->setObjectName(QStringLiteral("reduceBut"));
         reduceBut->setGeometry(QRect(0, 0, 31, 16));

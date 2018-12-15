@@ -11,7 +11,7 @@ public:
 	Car();
 	Car(QString nameAdd, float angleAdd,float sizeAdd[], float coordAdd[]);
 	Car(const Car &car);
-	~Car();
+	virtual ~Car();
 
 	void copyCar(const Car &car);
 	
@@ -28,11 +28,11 @@ public:
 	void setSize(float sizeAdd[]) ;
 	Car& operator = (NoCar t);
 	
-
-	void calculate();
+	float getR() const override;
+	//void calculate();
 private:
 	
 	float _size[2], _angle;
-	float _A[2], _B[2], _C[2], _D[2], _O[2],_R,_dots[4][2];
+	float _O[2];
 };
 

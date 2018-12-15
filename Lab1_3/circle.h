@@ -6,6 +6,18 @@ class Circle:
 {
 public:
 	Circle();
-	~Circle();
+	Circle(const Circle &addNo);
+	Circle(QString nameAdd, float rAdd, float coordAdd[]);
+	Circle& operator = (NoCar car);
+	virtual ~Circle();
+	virtual float getR() const override { return _r; };
+	void setR(float r) {
+		if (r > 0) {
+			_r = r;
+		}
+	}
+
+private:
+	float  _r;
 };
 
