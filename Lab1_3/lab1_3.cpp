@@ -17,6 +17,16 @@ Lab1_3::Lab1_3(QWidget *parent)
 	setEnabledMenu(false);
 	coonections();	
 	radioGabsC();
+	constrDial();	
+}
+
+void Lab1_3::constrDial() {
+	_dial = new QDialog(this);
+	QPushButton *btn = new QPushButton(_dial);
+	_dial->setGeometry(300, 300, btn->width() + 90, btn->height() + 60);
+	btn->move(30, 30);
+	btn->setText("Changes are not available\npress button to continue");
+	connect(btn, SIGNAL(clicked()),  _dial, SLOT(reject()));
 }
 
 void Lab1_3::setEnabledMenu(bool value) {
@@ -374,7 +384,16 @@ void Lab1_3::changeCar() {
 	Car * car = getCar();
 	if (car) {
 		int index = ui.comboBoxCar_3->currentData().toInt();
-		_motors->changeEl(car, index);
+		if (index >= 0 && index < _motors->getCount()) {
+			Car * oldEl = new Car(**(*_motors)[index]);
+			int count = _motors->getCount();
+			_motors->deleteElement(index);
+			_motors->addEl(car);
+			if (_motors->getCount() != count) {				
+				_dial->exec();
+				_motors->addEl(oldEl);				
+			}		
+		}
 	}
 	update();
 }
@@ -413,13 +432,23 @@ void Lab1_3::setPres() {
 }
 
 void Lab1_3::changePres() {
-	Circle * noCar = getPres();
-	if (noCar) {
-		int  index = ui.comboPress_3->currentData().toInt();
-		_motors->changeEl(noCar, index);
+	Circle * car = getPres();
+	if (car) {
+		int index = ui.comboPress_3->currentData().toInt();
+		if (index >= 0 && index < _motors->getCount()) {
+			Circle * oldEl = new Circle(**(*_motors)[index]);
+			int count = _motors->getCount();
+			_motors->deleteElement(index);
+			_motors->addEl(car);
+			if (_motors->getCount() != count) {
+				_dial->exec();
+				_motors->addEl(oldEl);
+			}
+		}
 	}
 	update();
 }
+
 
 void Lab1_3::doVisible1() {
 	_index = -1;
@@ -517,6 +546,7 @@ void Lab1_3::doVisible6() {
 }
 
 void Lab1_3::iDo2() {
+	
 	ui.but7_3->setVisible(false);
 	ui.comboBoxCar_3->setVisible(false);
 

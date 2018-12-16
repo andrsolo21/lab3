@@ -39,6 +39,16 @@ Circle::Circle(const Circle &addNo) {
 
 }
 
+Circle::Circle(const NoCar &addNo) {
+	if (addNo.getType() == ci) {
+		_name = addNo.getName();
+		_r = addNo.getR();
+		_coord[0] = addNo.getCoord(0);
+		_coord[1] = addNo.getCoord(1);
+	}
+
+}
+
 Circle::~Circle()
 {
 }

@@ -47,6 +47,18 @@ Car::Car(const Car &car) {
 	//calculate();
 
 }
+Car::Car(const NoCar &car) {
+	if (car.getType() == ca) {
+		_name = car.getName();
+		_angle = car.getAngle();
+		_size[0] = car.getSize(0);
+		_size[1] = car.getSize(1);
+		_coord[0] = car.getCoord(0);
+		_coord[1] = car.getCoord(1);
+	}
+	//calculate();
+
+}
 Car& Car::operator = (NoCar car) {
 	_name = car.getName();
 	_angle = car.getAngle();

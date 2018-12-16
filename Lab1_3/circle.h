@@ -7,6 +7,7 @@ class Circle:
 public:
 	Circle();
 	Circle(const Circle &addNo);
+	Circle(const NoCar &addNo);
 	Circle(QString nameAdd, float rAdd, float coordAdd[]);
 	Circle& operator = (NoCar car);
 	virtual ~Circle();

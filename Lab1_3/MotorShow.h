@@ -29,6 +29,7 @@ public:
 protected:
 	NoCar **_head, **_tail;
 	int _grr = 0;
+	
 
 	void grow10(int zn = 1);
 	bool checkCar(const NoCar & carToCheck);

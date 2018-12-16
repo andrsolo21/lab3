@@ -11,6 +11,7 @@ public:
 	Car();
 	Car(QString nameAdd, float angleAdd,float sizeAdd[], float coordAdd[]);
 	Car(const Car &car);
+	Car(const NoCar &car);
 	virtual ~Car();
 
 	void copyCar(const Car &car);

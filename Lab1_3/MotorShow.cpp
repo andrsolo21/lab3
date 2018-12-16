@@ -152,8 +152,20 @@ void MotorShow::deleteAll() {
 }
 
 void MotorShow::changeEl(NoCar * noCar, int c) {
-	if (c >= 0 && c < getCount()) {
-		NoCar * oldEl = new NoCar ( **(_head + c));
+	/*if (c >= 0 && c < getCount()) {
+		NoCar * oldEl = new NoCar(**(_head + c));
+		int count = getCount();
+		deleteElement(c);
+		addEl(noCar);
+		if (getCount() != count) {
+			_dial = new QDialog(this);
+			_dial->exec();
+			delete _dial;
+			addEl(oldEl);
+			//return false;
+		}
+		//return true;
+		/*NoCar * oldEl = new NoCar ( **(_head + c));
 		deleteElement(c);
 		if (checkEl(*noCar)) {
 			_tail++;
@@ -169,7 +181,7 @@ void MotorShow::changeEl(NoCar * noCar, int c) {
 			*(_head + c) = oldEl;
 			delete noCar;
 		}
-	}
+	}*/
 }
 
 void MotorShow::grow10(int zn) {
@@ -262,11 +274,10 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2) 
 						- pow((*i)->getR(), 2) < 0)
 						d++;		
-				if (d < 4)
+				if (d == 3 || d == 2 || d == 1)
 					return false;
-				else
-					if ((*i)->getName() != carToCheck.getName())
-						return false;
+				else if ((*i)->getName() != carToCheck.getName() && d == 0)
+					return false;
 			}
 		}
 	}

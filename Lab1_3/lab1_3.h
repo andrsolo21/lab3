@@ -48,6 +48,7 @@ public slots:
 
 private:
 	Ui::Lab1_3Class ui;
+	QDialog * _dial;
 	int _gabarits[2] = { 0 ,0 }, _index;
 	float _otn = 1;
 	MotorShow *_motors = NULL;
@@ -60,4 +61,5 @@ private:
 	Circle * getPres();
 	Car * getCar();
 	void setEnabledMenu(bool value);
+	void constrDial();
 };
