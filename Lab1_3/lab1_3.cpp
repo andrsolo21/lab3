@@ -104,9 +104,12 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 		for (auto i = 0; i < _motors->getCount(); i++) {
 			if (_index == i)
 				painter.setBrush(QBrush(Qt::red));
-			if (!((*(*_motors)[i])->getType())) {
-				tempNoCar = new Circle;
-				*tempNoCar = **(*_motors)[i];
+			if (((*(*_motors)[i])->getType()) == ci) {
+				NoCar * cr = *(*_motors)[i];
+				Circle * tempNoCar = dynamic_cast<Circle *>(cr);
+				//Circle thisR2 = (Circle)cr;
+				//tempNoCar = new Circle;
+				//*tempNoCar = **(*_motors)[i];
 				center2 = QPointF(tempNoCar->getCoord(0) * _otn + center.x() - gabs[0] / 2,
 					tempNoCar->getCoord(1)* _otn + center.y() - gabs[1] / 2);
 				painter.drawEllipse(center2, tempNoCar->getR() * _otn, tempNoCar->getR() * _otn);
@@ -120,7 +123,7 @@ void Lab1_3::paintEvent(QPaintEvent *event)
 
 			if (_index == i)
 					painter.setBrush(QBrush(Qt::red));
-			if ((*(*_motors)[i])->getType()) {
+			if ((*(*_motors)[i])->getType() == ca) {
 				tempCar = new Car;
 				*tempCar = **(*_motors)[i];
 
@@ -303,7 +306,7 @@ void Lab1_3::comboCar() {
 	ui.comboBoxCar_3->setEnabled(true);
 	int count = 0;
 	for (auto i = 0; i < _motors->getCount(); i++) {
-		if ((*(*_motors)[i])->getType()) {
+		if ((*(*_motors)[i])->getType() == ca) {
 			count++;
 			ui.comboBoxCar_3->addItem(((*(*_motors)[i])->getName()) + " Num: " +  QString::number(i), QVariant(i));
 		}
@@ -319,7 +322,7 @@ void Lab1_3::comboPres() {
 	ui.comboPress_3->setEnabled(true);
 	int count = 0;
 	for (auto i = 0; i < _motors->getCount(); i++) {
-		if (!((*(*_motors)[i])->getType())) {
+		if (((*(*_motors)[i])->getType()) == ci) {
 			count++;
 			ui.comboPress_3->addItem(((*(*_motors)[i])->getName()) + " Num: " + QString::number(i), QVariant(i));
 		}

@@ -1,9 +1,12 @@
 #pragma once
 //enum UnitCar = { ukCar,ukCircle };
 
+
+enum UnitCar { nc, ci, ca };
 class NoCar
 {
 public:
+	
 	NoCar();
 	virtual ~NoCar();
 	QString getName() const ;
@@ -11,8 +14,8 @@ public:
 	void setName(QString nameAdd);
 	void setCoord(float coordAdd[]);
 
-	virtual float getR() const { return -1; };
-	virtual bool getType() const { return false; }
+	virtual float getR() const { return 0.5; };
+	virtual UnitCar getType() const { return nc; }
 
 	//UnitCar getKind() { return _kind; };
 

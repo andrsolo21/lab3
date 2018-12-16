@@ -16,6 +16,7 @@ public:
 			_r = r;
 		}
 	}
+	UnitCar getType() const override { return ci; };
 
 private:
 	float  _r;

@@ -36,13 +36,15 @@ MotorShow::MotorShow(const MotorShow & addData) {
 	_gabarits[1] = addData.getGabarits(1);
 	grow10(addData.getCount());
 	for (int i = 0; i < addData.getCount(); i++) {
-		if ((*addData[i])->getType()) {
+		if ((*addData[i])->getType() == ca) {
 			Car * tempCar = new Car;
 			*tempCar = **addData[i];
 			addEl(tempCar);
 		}
 		else {
-			addEl(new NoCar(**addData[i]));
+			Circle * tempC = new Circle;
+			*tempC = **addData[i];
+			addEl(tempC);
 		}		
 	}
 }
@@ -82,7 +84,7 @@ void MotorShow::exportToFile(QString name) const {
 	fout << _gabarits[0] << ' ';
 	fout << _gabarits[1];
 	for (auto i = _head; i < _tail; i++) {
-		if ((*i)->getType()) {
+		if ((*i)->getType() == ca) {
 			fout << endl << "car";
 			fout << endl << ((*i)->getName()).toStdString() << endl;
 			fout << (*i)->getSize(0) << ' ' << (*i)->getSize(1) << ' ' << (*i)->getAngle() <<
@@ -202,13 +204,14 @@ void MotorShow::grow10(int zn) {
 
 bool MotorShow::checkEl(const NoCar & elToCheck) {
 	
-	if (elToCheck.getType()) {
+	if (elToCheck.getType() == ca) {
 		//машина
 		return checkCar(elToCheck);
 	}
 	else {
 		//стенд
-		return checkP(elToCheck);
+		if (elToCheck.getType() == ci)
+			return checkP(elToCheck);
 	}
 }
 
@@ -231,7 +234,7 @@ bool MotorShow::checkCar(const NoCar & carToCheck) {
 		
 
 		d = sqrt(pow((*i)->getCoord(0) - carToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - carToCheck.getCoord(1),2));
-		if ((*i)->getType()) {
+		if ((*i)->getType() == ca) {
 			if ((*i)->getR() + carToCheck.getR() > d)
 				return false;
 			else {
@@ -284,19 +287,18 @@ bool MotorShow::checkP(const NoCar & pToCheck) {
 		return false;
 
 	for (auto ** i = _head; i < _tail; i++) {
-		d = (pow((*i)->getCoord(0) - pToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - pToCheck.getCoord(1),2));
-		if ((*i)->getType()) {
-			if (pow((*i)->getRBig() + pToCheck.getR(),2) > d) {
+		d = sqrt(pow((*i)->getCoord(0) - pToCheck.getCoord(0),2) + pow((*i)->getCoord(1) - pToCheck.getCoord(1),2));
+		if ((*i)->getType() == ca) {
+			if ((*i)->getRBig() + pToCheck.getR() > d) {
 				d = 0;
 				for (auto j = 0; j < 4; j++)
-					if (pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2)
-						- pow((*i)->getR(), 2) < 0)
+					if (sqrt(pow(dots1[j][0] - (*i)->getCoord(0), 2) + pow(dots1[j][1] - (*i)->getCoord(1), 2))
+						- (*i)->getR() < 0)
 						d++;
-				/*if (d < 4)
+				if (d == 3 || d == 2 || d == 1)
 					return false;
-				else
-					if ((*i)->getName() != pToCheck.getName())
-						return false;*/
+				else if ((*i)->getName() != pToCheck.getName() && d == 0)
+					return false;
 			}
 		}
 		else {

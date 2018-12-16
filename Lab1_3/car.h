@@ -17,7 +17,7 @@ public:
 	
 	float getAngle() const override;
 	float getSize(int i) const override;
-	bool getType() const override { return true; };
+	UnitCar getType() const override { return ca; };
 	float getA(int i) const override;
 	float getB(int i) const override;
 	float getC(int i) const override;
